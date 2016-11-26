@@ -10,9 +10,14 @@ html {
 	height: 100%;
 }
 
+#canvas {
+	background-color: white;
+}
+
 #mainCanvas {
 	width: 100%;
 	height: 100%;
+	z-index: 0;
 }
 
 #mainGui {
@@ -21,23 +26,27 @@ html {
 	z-index: 10;
 	width: 100%;
 	bottom: 40px;
+	pointer-events: none;
 }
 
 #center {
 	margin-left: 200px;
 	margin-right: 200px;
 	height: 100%;
+	z-index: -10;
 	position: relative;
+	pointer-events: none;
 }
 
 #tools {
-	height: 100px;
+	height: auto;
 	background-color: rgba(255,165,0,0.5);
+	pointer-events: all;
 }
 
 #misc {
 	height: 100px;
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(0,0,0,0.5);
 	position: absolute;
 	bottom: 0;
 	width: 100%;

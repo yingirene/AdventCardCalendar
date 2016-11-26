@@ -5,21 +5,66 @@ var width = scale;
 var height = (scale/xRatio) * yRatio;
 var isLandscape = true;
 
-var mainCard
+var canvas, context;
+var mainCard;
 
-window.onload = function() {
-	console.log("It begins.");
-	var canvas = document.getElementById("mainCanvas");
-	var context = canvas.getContext("2d");
-	context.canvas.width = window.innerWidth;
-	context.canvas.height = window.innerHeight;
+/* Simple Drawing Mechanic */
+var clickX = new Array();
+var clickY = new Array();
+var clickDrag = new Array();
+var paint;
 
-	if(isLandscape) {
-		mainCard = new Card(width, height);
-	} else {
-		mainCard = new Card(height, width);
+function addClick(x,y,dragging) {
+	clickX.push(x);
+	clickY.push(y);
+	clickDrag.push(dragging);
+}
+
+function redraw() {
+	context.clearRect(0,0,context.canvas.width, context.canvas.height);
+
+	context.strokeStyle = "#df4b26";
+	context.lineJoin = "round";
+	context.lineWidth = 5;
+
+	for(var i = 0; i < clickX.length; i++) {
+		context.beginPath();
+		if(clickDrag[i] && i) {
+			context.moveTo(clickX[i-1], clickY[i-1]);
+		} else {
+			context.moveTo(clickX[i]-1, clickY[i]);
+		}
+		context.lineTo(clickX[i], clickY[i]);
+		context.closePath();
+		context.stroke();
 	}
-};
+}
+
+$("#mainCanvas").mousedown(function(e) {
+	var mouseX = e.pageX - this.offsetLeft;
+	var mouseY = e.pageY - this.offsetTop;
+
+	paint = true;
+	addClick(mouseX, mouseY);
+	redraw();
+});
+
+$("#mainCanvas").mousemove(function(e) {
+	if(paint) {
+		var mouseX = e.pageX - this.offsetLeft;
+		var mouseY = e.pageY - this.offsetTop;
+		addClick(mouseX, mouseY, true);
+		redraw();
+	}
+});
+
+$("#mainCanvas").mouseup(function(e) {
+	paint = false;
+});
+
+$("#mainCanvas").mouseleave(function(e) {
+	paint = false;
+});
 
 /* Card class describes the card and its current contents */
 class Card {
@@ -49,3 +94,17 @@ class Layer {
 		}
 	}
 }
+
+window.onload = function() {
+	console.log("It begins.");
+	canvas = document.getElementById("mainCanvas");
+	context = canvas.getContext("2d");
+	context.canvas.width = window.innerWidth;
+	context.canvas.height = window.innerHeight;
+
+	if(isLandscape) {
+		mainCard = new Card(width, height);
+	} else {
+		mainCard = new Card(height, width);
+	}
+};
