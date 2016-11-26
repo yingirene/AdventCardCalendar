@@ -1,0 +1,74 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	color: black;
+	background-color: red;
+	width: 100%;
+	height: 100%;
+}
+
+#mainCanvas {
+	width: 100%;
+	height: 100%;
+}
+
+#mainGui {
+	top: 0;
+	position: absolute;
+	z-index: 10;
+	width: 100%;
+	bottom: 40px;
+}
+
+#center {
+	margin-left: 200px;
+	margin-right: 200px;
+	height: 100%;
+	position: relative;
+}
+
+#tools {
+	height: 100px;
+	background-color: rgba(255,165,0,0.5);
+}
+
+#misc {
+	height: 100px;
+	background-color: rgba(255,255,255,0.5);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#subtools {
+	float: left;
+	height: 100%;
+	width: 200px;
+	background-color: cyan;
+	transition: 0.3s ease-in-out;
+	border-radius: 0px 20px 20px 0px;
+}
+
+.hidden {
+	width: 0 !important;
+}
+
+#properties {
+	float: right;
+	height: 100%;
+	width: 200px;
+	background-color: green;
+	transition: 0.3s ease-in-out;
+	border-radius: 20px 0px 0px 20px;
+}
+
+#footer {
+	margin-top: -44px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	line-height: 40px;
+}
