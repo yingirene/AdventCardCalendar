@@ -1,0 +1,21 @@
+{ "calendar" : [
+        {
+            "day": 1,
+            "type": "stamp",
+            "name": "cat",
+            "gift": "images/stamps/cat.png"
+        },
+        {
+            "day": 2,
+            "type": "stamp",
+            "name": "hat",
+            "gift": "images/stamps/hat.png"
+        },
+        {
+            "day": 3,
+            "type": "brush",
+            "name": "tinsel",
+            "gift": "images/brushes/tinsel.png"
+        }
+    ]
+}

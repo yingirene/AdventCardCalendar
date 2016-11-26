@@ -8,6 +8,30 @@ var isLandscape = true;
 var canvas, context;
 var mainCard;
 
+window.onload = function() {
+	console.log("It begins.");
+	canvas = document.getElementById("mainCanvas");
+	context = canvas.getContext("2d");
+	context.canvas.width = window.innerWidth;
+	context.canvas.height = window.innerHeight;
+
+	if(isLandscape) {
+		mainCard = new Card(width, height);
+	} else {
+		mainCard = new Card(height, width);
+	}
+
+	prepareCanvas();
+};
+
+/* Stamp and Brush Mechanic */
+var stamp = new Image();
+var type = "stamp";
+
+function prepareCanvas() {
+	stamp.src = "images/stamps/cat.png";
+}
+
 /* Simple Drawing Mechanic */
 var clickX = new Array();
 var clickY = new Array();
@@ -34,7 +58,8 @@ function redraw() {
 		} else {
 			context.moveTo(clickX[i]-1, clickY[i]);
 		}
-		context.lineTo(clickX[i], clickY[i]);
+		context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
+		//context.lineTo(clickX[i], clickY[i]);
 		context.closePath();
 		context.stroke();
 	}
@@ -44,7 +69,11 @@ $("#mainCanvas").mousedown(function(e) {
 	var mouseX = e.pageX - this.offsetLeft;
 	var mouseY = e.pageY - this.offsetTop;
 
-	paint = true;
+	if(type == "stamp") {
+		paint = false;
+	} else {
+		paint = true;
+	}
 	addClick(mouseX, mouseY);
 	redraw();
 });
@@ -94,17 +123,3 @@ class Layer {
 		}
 	}
 }
-
-window.onload = function() {
-	console.log("It begins.");
-	canvas = document.getElementById("mainCanvas");
-	context = canvas.getContext("2d");
-	context.canvas.width = window.innerWidth;
-	context.canvas.height = window.innerHeight;
-
-	if(isLandscape) {
-		mainCard = new Card(width, height);
-	} else {
-		mainCard = new Card(height, width);
-	}
-};

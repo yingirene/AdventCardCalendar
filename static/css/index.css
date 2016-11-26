@@ -59,6 +59,11 @@ html {
 	background-color: cyan;
 	transition: 0.3s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
+	overflow: hidden;
+}
+
+#subtools div {
+	margin: 10px;
 }
 
 .hidden {
