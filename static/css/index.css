@@ -1,3 +1,11 @@
+element {
+	--red: rgba(254,95,85,1);
+	--orange: rgba(240,182,127,1);
+	--beige: rgba(214,209,177,1);
+	--green: rgba(199,239,207,1);
+	--yellow: rgba(238,245,219,1);
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -5,7 +13,7 @@
 
 html {
 	color: black;
-	background-color: red;
+	background-color: rgba(254,95,85,1);
 	width: 100%;
 	height: 100%;
 }
@@ -18,6 +26,27 @@ html {
 	width: 100%;
 	height: 100%;
 	z-index: 0;
+}
+
+#calendar {
+	position: absolute;
+	z-index: 20;
+	top: 200px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 50%;
+	height: 200px;
+	color: white;
+	background-color: rgba(254,95,85,1);
+	padding: 50px;
+	border-radius: 20px;
+	margin: 0 auto;
+	transition: 0.5s ease-in-out;
+}
+
+.slide-up {
+	top: -400px !important;
 }
 
 #mainGui {
@@ -40,13 +69,13 @@ html {
 
 #tools {
 	height: auto;
-	background-color: rgba(255,165,0,0.5);
+	background-color: rgba(240,182,127,1);
 	pointer-events: all;
 }
 
 #misc {
 	height: 100px;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(238,245,219,0.5);
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -56,7 +85,7 @@ html {
 	float: left;
 	height: 100%;
 	width: 200px;
-	background-color: cyan;
+	background-color: rgba(199,239,207,1);
 	transition: 0.3s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
 	overflow: hidden;
@@ -74,7 +103,7 @@ html {
 	float: right;
 	height: 100%;
 	width: 200px;
-	background-color: green;
+	background-color: rgba(199,239,207,1);
 	transition: 0.3s ease-in-out;
 	border-radius: 20px 0px 0px 20px;
 }
