@@ -15,7 +15,7 @@ window.onload = function() {
 	context.canvas.width = window.innerWidth;
 	context.canvas.height = window.innerHeight;
 
-	//prepareCanvas();
+	prepareCanvas();
 };
 
 /* Event Listeners */
@@ -51,21 +51,27 @@ function addClick(x,y,dragging) {
 function redraw() {
 	context.clearRect(0,0,context.canvas.width, context.canvas.height);
 
-	context.strokeStyle = "#df4b26";
-	context.lineJoin = "round";
-	context.lineWidth = 5;
-
-	for(var i = 0; i < clickX.length; i++) {
-		context.beginPath();
-		if(clickDrag[i] && i) {
-			context.moveTo(clickX[i-1], clickY[i-1]);
-		} else {
-			context.moveTo(clickX[i]-1, clickY[i]);
+	if(type == "stamp") {
+		for(var i = 0; i < clickX.length; i++) {
+			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
 		}
-		//context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
-		context.lineTo(clickX[i], clickY[i]);
-		context.closePath();
-		context.stroke();
+	} else {
+		context.strokeStyle = "#df4b26";
+		context.lineJoin = "round";
+		context.lineWidth = 5;
+
+		for(var i = 0; i < clickX.length; i++) {
+			context.beginPath();
+			if(clickDrag[i] && i) {
+				context.moveTo(clickX[i-1], clickY[i-1]);
+			} else {
+				context.moveTo(clickX[i]-1, clickY[i]);
+			}
+			context.lineTo(clickX[i], clickY[i]);
+			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
+			context.closePath();
+			context.stroke();
+		}
 	}
 }
 
@@ -104,18 +110,18 @@ function undo() {
 /* Mouse Listeners */
 
 $("#mainCanvas").mousedown(function(e) {
-	var mouseX = e.pageX - this.offsetLeft;
-	var mouseY = e.pageY - this.offsetTop;
-
 	paint = true;
-
-	addClick(mouseX, mouseY);
-	redraw();
+	if(type != "stamp") {
+		var mouseX = e.pageX - this.offsetLeft;
+		var mouseY = e.pageY - this.offsetTop;
+		addClick(mouseX, mouseY);
+		redraw();
+	}
 });
 
 
 $("#mainCanvas").mousemove(function(e) {
-	if(paint) {
+	if(paint && type != "stamp") {
 		var mouseX = e.pageX - this.offsetLeft;
 		var mouseY = e.pageY - this.offsetTop;
 		addClick(mouseX, mouseY, true);
@@ -126,6 +132,12 @@ $("#mainCanvas").mousemove(function(e) {
 
 $("#mainCanvas").mouseup(function(e) {
 	if(paint) {
+		if(type == "stamp") {
+			var mouseX = e.pageX - this.offsetLeft;
+			var mouseY = e.pageY - this.offsetTop;
+			addClick(mouseX, mouseY);
+			redraw();
+		}
 		paint = false;
 		clickHist.push({
 			"clickX": clickX.slice(),
