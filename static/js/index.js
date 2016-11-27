@@ -28,6 +28,10 @@ var brushSize = 5;
 
 window.onload = function() {
 	console.log("It begins.");
+	$("#canvas").draggable({
+		cursor: "move"
+	});
+	$("#canvas").draggable('disable');
 	canvas = document.getElementById("mainCanvas");
 	context = canvas.getContext("2d");
 	context.canvas.width = width;
@@ -155,33 +159,47 @@ function undo() {
 }
 
 /* Mouse Listeners */
-
-$("#mainCanvas").mousedown(function(e) {
-	paint = true;
-	if(type != "stamp") {
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
-		addClick(mouseX, mouseY);
-		redraw();
+var isDrag = false;
+$(window).keydown(function(e) {
+	if(e.which == 32) {
+		e.preventDefault();
+		$("#canvas").draggable('enable');
+		isDrag = true;
 	}
 });
 
+$(window).keyup(function(e) {
+	$("#canvas").draggable('disable');
+	isDrag = false;
+});
+
+$("#mainCanvas").mousedown(function(e) {
+	if(!isDrag) {
+		paint = true;
+		if(type != "stamp") {
+			console.log($(this).offset().left);
+			var mouseX = e.pageX - $(this).offset().left;
+			var mouseY = e.pageY - $(this).offset().top;
+			addClick(mouseX, mouseY);
+			redraw();
+		}
+	}
+});
 
 $("#mainCanvas").mousemove(function(e) {
 	if(paint && type != "stamp") {
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
+		var mouseX = e.pageX - $(this).offset().left;
+		var mouseY = e.pageY - $(this).offset().top;
 		addClick(mouseX, mouseY, true);
 		redraw();
 	}
 });
 
-
 $("#mainCanvas").mouseup(function(e) {
 	if(paint) {
 		if(type == "stamp") {
-			var mouseX = e.pageX - this.offsetLeft;
-			var mouseY = e.pageY - this.offsetTop;
+			var mouseX = e.pageX - $(this).offset().left;
+			var mouseY = e.pageY - $(this).offset().top;
 			addClick(mouseX, mouseY);
 			redraw();
 		}

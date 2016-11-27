@@ -28,6 +28,7 @@ html, body {
 
 #canvas {
 	background-color: white;
+	position: relative;
 }
 
 #mainCanvas {
