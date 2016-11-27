@@ -10,15 +10,15 @@ var colors = {
 	"cyan" : "rgba(0,255,255,1)"
 };
 
-var xRatio = 3;
-var yRatio = 2;
+var aspectRatio = 2/3; //yRatio/xRatio
 var scale = 900;
 var width = scale;
-var height = (scale/xRatio) * yRatio;
+var height = scale * aspectRatio;
 var isLandscape = true;
 
 var canvas, context;
 var bgImage = new Image();
+var bgObj = {};
 
 /* Brush Properties */
 var stamp = new Image();
@@ -58,6 +58,10 @@ function handleFiles(e) {
 	var objectURL = window.URL.createObjectURL(file);
 	bgImage.src = objectURL;
 	bgImage.onload = function() {
+		bgObj["srcWidth"] = bgImage.width;
+		bgObj["srcHeight"] = bgImage.width * aspectRatio;
+		bgObj["srcX"] = 0;
+		bgObj["srcY"] = (bgImage.height - bgObj["srcHeight"])/2;
 		redraw();
 	}
 }
@@ -104,7 +108,11 @@ function redraw() {
 	//context.clearRect(0,0,context.canvas.width, context.canvas.height);
 	context.fillStyle = colors["white"];
 	context.fillRect(0,0,context.canvas.width, context.canvas.height);
-	context.drawImage(bgImage, 0,0,context.canvas.width, context.canvas.height);
+	if(Object.keys(bgObj).length > 0) {
+		context.drawImage(bgImage,
+			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
+			0,0,context.canvas.width, context.canvas.height);
+	}
 
 	context.lineJoin = "round";
 	context.lineCap = "round";
