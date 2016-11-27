@@ -93,6 +93,7 @@ html {
 	transition: 0.3s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
 	overflow: hidden;
+	pointer-events: all;
 }
 
 #subtools div {

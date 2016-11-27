@@ -27,9 +27,14 @@ $("#clearBtn").click(function(e) {
 	clear();
 });
 
+/* Tool Listeners*/
+$("#subtools div").click(function(e) {
+	type = $(this)[0].className;
+});
+
 /* Stamp and Brush Mechanic */
 var stamp = new Image();
-var type = "stamp";
+var type = "brush";
 
 function prepareCanvas() {
 	stamp.src = "images/stamps/cat.png";
@@ -40,27 +45,27 @@ var clickHist = [];
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
+var clickType = new Array();
 var paint;
 
 function addClick(x,y,dragging) {
 	clickX.push(x);
 	clickY.push(y);
 	clickDrag.push(dragging);
+	clickType.push(type);
 }
 
 function redraw() {
 	context.clearRect(0,0,context.canvas.width, context.canvas.height);
 
-	if(type == "stamp") {
-		for(var i = 0; i < clickX.length; i++) {
-			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
-		}
-	} else {
-		context.strokeStyle = "#df4b26";
-		context.lineJoin = "round";
-		context.lineWidth = 5;
+	context.strokeStyle = "#df4b26";
+	context.lineJoin = "round";
+	context.lineWidth = 5;
 
-		for(var i = 0; i < clickX.length; i++) {
+	for(var i = 0; i < clickX.length; i++) {
+		if(clickType[i] == "stamp") {
+			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
+		} else {
 			context.beginPath();
 			if(clickDrag[i] && i) {
 				context.moveTo(clickX[i-1], clickY[i-1]);
@@ -68,7 +73,6 @@ function redraw() {
 				context.moveTo(clickX[i]-1, clickY[i]);
 			}
 			context.lineTo(clickX[i], clickY[i]);
-			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
 			context.closePath();
 			context.stroke();
 		}
@@ -80,10 +84,12 @@ function clear() {
 	clickX = new Array();
 	clickY = new Array();
 	clickDrag = new Array();
+	clickType = new Array();
 	clickHist.push({
 		"clickX": clickX.slice(),
 		"clickY": clickY.slice(),
-		"clickDrag": clickDrag.slice()
+		"clickDrag": clickDrag.slice(),
+		"clickType": clickType.slice()
 	});
 }
 
@@ -93,6 +99,7 @@ function redrawHistory() {
 	clickX = item["clickX"].slice();
 	clickY = item["clickY"].slice();
 	clickDrag = item["clickDrag"].slice();
+	clickType = item["clickType"].slice();
 	redraw();
 }
 
@@ -142,7 +149,8 @@ $("#mainCanvas").mouseup(function(e) {
 		clickHist.push({
 			"clickX": clickX.slice(),
 			"clickY": clickY.slice(),
-			"clickDrag": clickDrag.slice()
+			"clickDrag": clickDrag.slice(),
+			"clickType": clickType.slice()
 		});
 	}
 });
@@ -153,7 +161,8 @@ $("#mainCanvas").mouseleave(function(e) {
 		clickHist.push({
 			"clickX": clickX.slice(),
 			"clickY": clickY.slice(),
-			"clickDrag": clickDrag.slice()
+			"clickDrag": clickDrag.slice(),
+			"clickType": clickType.slice()
 		});
 	}
 });
