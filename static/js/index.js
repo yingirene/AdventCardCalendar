@@ -18,7 +18,7 @@ var height = (scale/xRatio) * yRatio;
 var isLandscape = true;
 
 var canvas, context;
-var mainCard;
+var bgImage = new Image();
 
 /* Brush Properties */
 var stamp = new Image();
@@ -48,6 +48,19 @@ $("#undoBtn").click(function(e) {
 $("#clearBtn").click(function(e) {
 	clear();
 });
+
+$("#uploadBtn").click(function(e) {
+    $("#fileInput").click();
+});
+
+function handleFiles(e) {
+	var file = e[0];
+	var objectURL = window.URL.createObjectURL(file);
+	bgImage.src = objectURL;
+	bgImage.onload = function() {
+		redraw();
+	}
+}
 
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
@@ -88,7 +101,10 @@ function addClick(x,y,dragging) {
 }
 
 function redraw() {
-	context.clearRect(0,0,context.canvas.width, context.canvas.height);
+	//context.clearRect(0,0,context.canvas.width, context.canvas.height);
+	context.fillStyle = colors["white"];
+	context.fillRect(0,0,context.canvas.width, context.canvas.height);
+	context.drawImage(bgImage, 0,0,context.canvas.width, context.canvas.height);
 
 	context.lineJoin = "round";
 	context.lineCap = "round";

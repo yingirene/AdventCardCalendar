@@ -27,11 +27,11 @@ html, body {
 }
 
 #canvas {
-	background-color: white;
 	position: relative;
 }
 
 #mainCanvas {
+	background-color: white;
 	z-index: 0;
 }
 
