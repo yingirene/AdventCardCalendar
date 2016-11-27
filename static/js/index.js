@@ -15,14 +15,17 @@ window.onload = function() {
 	context.canvas.width = window.innerWidth;
 	context.canvas.height = window.innerHeight;
 
-	if(isLandscape) {
-		mainCard = new Card(width, height);
-	} else {
-		mainCard = new Card(height, width);
-	}
-
-	prepareCanvas();
+	//prepareCanvas();
 };
+
+/* Event Listeners */
+$("#undoBtn").click(function(e) {
+	undo();
+});
+
+$("#clearBtn").click(function(e) {
+	clear();
+});
 
 /* Stamp and Brush Mechanic */
 var stamp = new Image();
@@ -33,6 +36,7 @@ function prepareCanvas() {
 }
 
 /* Simple Drawing Mechanic */
+var clickHist = [];
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
@@ -58,25 +62,57 @@ function redraw() {
 		} else {
 			context.moveTo(clickX[i]-1, clickY[i]);
 		}
-		context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
-		//context.lineTo(clickX[i], clickY[i]);
+		//context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
+		context.lineTo(clickX[i], clickY[i]);
 		context.closePath();
 		context.stroke();
 	}
 }
 
+function clear() {
+	context.clearRect(0,0,context.canvas.width, context.canvas.height);
+	clickX = new Array();
+	clickY = new Array();
+	clickDrag = new Array();
+	clickHist.push({
+		"clickX": clickX.slice(),
+		"clickY": clickY.slice(),
+		"clickDrag": clickDrag.slice()
+	});
+}
+
+/* Handle undo functionality */
+function redrawHistory() {
+	var item = clickHist.slice(-1).pop();
+	clickX = item["clickX"].slice();
+	clickY = item["clickY"].slice();
+	clickDrag = item["clickDrag"].slice();
+	redraw();
+}
+
+function undo() {
+	clickHist.pop();
+	if(clickHist.length > 0) {
+		redrawHistory();
+	} else if(clickHist.length == 0) {
+		clear();
+	} else {
+		console.log("Nothing left to undo.");
+	}
+}
+
+/* Mouse Listeners */
+
 $("#mainCanvas").mousedown(function(e) {
 	var mouseX = e.pageX - this.offsetLeft;
 	var mouseY = e.pageY - this.offsetTop;
 
-	if(type == "stamp") {
-		paint = false;
-	} else {
-		paint = true;
-	}
+	paint = true;
+
 	addClick(mouseX, mouseY);
 	redraw();
 });
+
 
 $("#mainCanvas").mousemove(function(e) {
 	if(paint) {
@@ -87,39 +123,25 @@ $("#mainCanvas").mousemove(function(e) {
 	}
 });
 
+
 $("#mainCanvas").mouseup(function(e) {
-	paint = false;
+	if(paint) {
+		paint = false;
+		clickHist.push({
+			"clickX": clickX.slice(),
+			"clickY": clickY.slice(),
+			"clickDrag": clickDrag.slice()
+		});
+	}
 });
 
 $("#mainCanvas").mouseleave(function(e) {
-	paint = false;
+	if(paint) {
+		paint = false;
+		clickHist.push({
+			"clickX": clickX.slice(),
+			"clickY": clickY.slice(),
+			"clickDrag": clickDrag.slice()
+		});
+	}
 });
-
-/* Card class describes the card and its current contents */
-class Card {
-	/* 2d array buffer for pixels on the card */
-	constructor(width, height) {
-		this.width = width;
-		this.height = height;
-		this.cardBuf = new Array(height);
-		var i;
-		for(i=0; i < height; i++) {
-			this.cardBuf[i] = new Array(width);
-		}
-	}
-}
-
-/* Layer Class: Used when adding a new element to the card.
- * Cleared after completing addition to card.
- */
-class Layer {
-	constructor(width, height) {
-		this.width = width;
-		this.height = height;
-		this.previewBuf = new Array(height);
-		var i;
-		for(i=0; i < height; i++) {
-			this.previewBuf[i] = new Array(width);
-		}
-	}
-}

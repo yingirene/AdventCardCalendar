@@ -2,20 +2,152 @@
         {
             "day": 1,
             "type": "stamp",
-            "name": "cat",
-            "gift": "images/stamps/cat.png"
+            "name": ["cat"],
+            "gift": ["images/stamps/cat.png"]
         },
         {
             "day": 2,
             "type": "stamp",
-            "name": "hat",
-            "gift": "images/stamps/hat.png"
+            "name": ["hat"],
+            "gift": ["images/stamps/hat.png"]
         },
         {
             "day": 3,
             "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 4,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 5,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 6,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 7,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 8,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 9,
+            "type": "brush",
             "name": "tinsel",
             "gift": "images/brushes/tinsel.png"
+        },
+        {
+            "day": 10,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 11,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 12,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 13,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 14,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 15,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 16,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 17,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 18,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 19,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 20,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 21,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 22,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 23,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 24,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
+        },
+        {
+            "day": 25,
+            "type": "brush",
+            "name": ["tinsel"],
+            "gift": ["images/brushes/tinsel.png"]
         }
     ]
 }

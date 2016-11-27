@@ -73,6 +73,10 @@ html {
 	pointer-events: all;
 }
 
+#mainTools div {
+	display: inline-block;
+}
+
 #misc {
 	height: 100px;
 	background-color: rgba(238,245,219,0.5);
