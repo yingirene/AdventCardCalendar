@@ -1,3 +1,15 @@
+/* Colors */
+var colors = {
+	"black" : "rgba(0,0,0,1)",
+	"white" : "rgba(255,255,255,1)",
+	"red" : "rgba(255,0,0,1)",
+	"green" : "rgba(0,255,0,1)",
+	"blue" : "rgba(0,0,255,1)",
+	"yellow" : "rgba(255,255,0,1)",
+	"magenta" : "rgba(255,0,255,1)",
+	"cyan" : "rgba(0,255,255,1)"
+};
+
 var xRatio = 3;
 var yRatio = 2;
 var scale = 900;
@@ -8,12 +20,18 @@ var isLandscape = true;
 var canvas, context;
 var mainCard;
 
+/* Brush Properties */
+var stamp = new Image();
+var type = "brush";
+var value = colors["red"];
+var brushSize = 5;
+
 window.onload = function() {
 	console.log("It begins.");
 	canvas = document.getElementById("mainCanvas");
 	context = canvas.getContext("2d");
-	context.canvas.width = window.innerWidth;
-	context.canvas.height = window.innerHeight;
+	context.canvas.width = width;
+	context.canvas.height = height;
 
 	prepareCanvas();
 };
@@ -30,12 +48,18 @@ $("#clearBtn").click(function(e) {
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
 	type = $(this)[0].className;
+	if(type == "brush") {
+		value = colors[$(this)[0].id];
+	} else if(type == "size") {
+		if($(this)[0].id == "inc") {
+			brushSize++;
+		} else {
+			brushSize--;
+		}
+	}
 });
 
 /* Stamp and Brush Mechanic */
-var stamp = new Image();
-var type = "brush";
-
 function prepareCanvas() {
 	stamp.src = "images/stamps/cat.png";
 }
@@ -46,6 +70,8 @@ var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
 var clickType = new Array();
+var clickColor = new Array();
+var clickBrushSize = new Array();
 var paint;
 
 function addClick(x,y,dragging) {
@@ -53,19 +79,28 @@ function addClick(x,y,dragging) {
 	clickY.push(y);
 	clickDrag.push(dragging);
 	clickType.push(type);
+	clickColor.push(value);
+	clickBrushSize.push(brushSize);
 }
 
 function redraw() {
 	context.clearRect(0,0,context.canvas.width, context.canvas.height);
 
-	context.strokeStyle = "#df4b26";
 	context.lineJoin = "round";
-	context.lineWidth = 5;
+	context.lineCap = "round";
 
 	for(var i = 0; i < clickX.length; i++) {
+		context.strokeStyle = clickColor[i];
+		context.lineWidth = clickBrushSize[i];
 		if(clickType[i] == "stamp") {
+			context.globalCompositeOperation = "source-over";
 			context.drawImage(stamp, clickX[i]-50, clickY[i]-50, 100, 100);
 		} else {
+			if(clickType[i] == "eraser") {
+				context.globalCompositeOperation = "destination-out";
+			} else {
+				context.globalCompositeOperation = "source-over";
+			}
 			context.beginPath();
 			if(clickDrag[i] && i) {
 				context.moveTo(clickX[i-1], clickY[i-1]);
@@ -85,11 +120,14 @@ function clear() {
 	clickY = new Array();
 	clickDrag = new Array();
 	clickType = new Array();
+	clickColor = new Array();
 	clickHist.push({
 		"clickX": clickX.slice(),
 		"clickY": clickY.slice(),
 		"clickDrag": clickDrag.slice(),
-		"clickType": clickType.slice()
+		"clickType": clickType.slice(),
+		"clickColor": clickColor.slice(),
+		"clickBrushSize": clickBrushSize.slice()
 	});
 }
 
@@ -100,6 +138,8 @@ function redrawHistory() {
 	clickY = item["clickY"].slice();
 	clickDrag = item["clickDrag"].slice();
 	clickType = item["clickType"].slice();
+	clickColor = item["clickColor"].slice();
+	clickBrushSize = item["clickBrushSize"].slice();
 	redraw();
 }
 
@@ -150,7 +190,9 @@ $("#mainCanvas").mouseup(function(e) {
 			"clickX": clickX.slice(),
 			"clickY": clickY.slice(),
 			"clickDrag": clickDrag.slice(),
-			"clickType": clickType.slice()
+			"clickType": clickType.slice(),
+			"clickColor": clickColor.slice(),
+			"clickBrushSize": clickBrushSize.slice()
 		});
 	}
 });
@@ -162,7 +204,9 @@ $("#mainCanvas").mouseleave(function(e) {
 			"clickX": clickX.slice(),
 			"clickY": clickY.slice(),
 			"clickDrag": clickDrag.slice(),
-			"clickType": clickType.slice()
+			"clickType": clickType.slice(),
+			"clickColor": clickColor.slice(),
+			"clickBrushSize": clickBrushSize.slice()
 		});
 	}
 });

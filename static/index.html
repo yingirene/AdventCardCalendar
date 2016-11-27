@@ -7,7 +7,9 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</head>
 	<body>
-		<div id="canvas"><canvas id="mainCanvas"></canvas></div>
+		<div class="container">
+			<div id="canvas"><canvas id="mainCanvas"></canvas></div>
+		</div>
 		<div id="calendar">
 			<ul>
 				<li>Day 1</li>
@@ -17,7 +19,14 @@
 		<div id="container">
 			<div id="mainGui">
 				<div id="subtools" class="">
+					<div class="eraser">Eraser</div>
+					<div class="size" id="inc">+</div>
+					<div class="size" id="dec">-</div>
+					<h1>Stamps</h1>
 					<div class="stamp" id="cat">Cat</div>
+					<h1>Brushes</h1>
+					<div class="brush" id="black">Black</div>
+					<div class="brush" id="blue">Blue</div>
 				</div>
 				<div id="properties" class="hidden"></div>
 				<div id="center">
