@@ -45,36 +45,51 @@ body {
 #mainCanvas {
 	background-color: white;
 	z-index: 0;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 #calendar {
 	position: absolute;
 	z-index: 20;
-	top: 200px;
+	top: 15vh;
 	left: 0;
 	right: 0;
 	width: 50%;
 	height: auto;
 	color: white;
 	background-color: rgba(254,95,85,1);
-	padding: 40px;
+	padding: 5vh 10vw;
 	border-radius: 20px;
 	margin: 0 auto;
 	transition: 0.5s ease-in-out;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .slide-up {
 	top: -100% !important;
 }
 
+#closedSign {
+	margin: -2.5vh -5vw;
+	z-index: 10;
+	text-align: center;
+	font-size: 2.3vh;
+}
+
+#closedSign span {
+	padding: 0.5vh;
+	line-height: 4vh;
+	background-color: black;
+}
+
 #calendar h1 {
 	text-align: center;
-	margin-bottom: 2vh;
 }
 
 #calendar ul {
 	text-align: justify;
 	text-align-last: justify;
+	margin-top: 2vh;
 }
 
 #calendar li {
@@ -86,7 +101,16 @@ body {
 	border-radius: 3px;
 }
 
-#calendar div {
+#calendar li:hover {
+	background-color: rgba(250,115,105,1);
+}
+
+#calendar li.opened {
+	background-color: rgba(0,0,0,1);
+	color: rgba(240,182,127,1);
+}
+
+#calendar li>div {
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -168,4 +192,27 @@ body {
 	background-color: black;
 	color: white;
 	line-height: 40px;
+}
+
+.outlineText {
+	text-shadow: black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px,
+				black 0px 0px 1.5px
+	;
+	-webkit-font-smoothing: antialiased;
 }
