@@ -18,6 +18,18 @@ html, body {
 	height: 100%;
 }
 
+body {
+	max-width: 100%;
+	overflow: hidden;
+	background: repeating-linear-gradient(
+		-45deg,
+		rgba(254,95,85,1),
+		rgba(254,95,85,1) 20px,
+		rgba(240,182,127,1) 20px,
+		rgba(240,182,127,1) 40px
+	);
+}
+
 .container {
 	display: flex;
 	justify-content: center;
@@ -39,21 +51,48 @@ html, body {
 	position: absolute;
 	z-index: 20;
 	top: 200px;
-	bottom: 0;
 	left: 0;
 	right: 0;
 	width: 50%;
-	height: 200px;
+	height: auto;
 	color: white;
 	background-color: rgba(254,95,85,1);
-	padding: 50px;
+	padding: 40px;
 	border-radius: 20px;
 	margin: 0 auto;
 	transition: 0.5s ease-in-out;
 }
 
 .slide-up {
-	top: -400px !important;
+	top: -100% !important;
+}
+
+#calendar h1 {
+	text-align: center;
+	margin-bottom: 2vh;
+}
+
+#calendar ul {
+	text-align: justify;
+	text-align-last: justify;
+}
+
+#calendar li {
+	position: relative;
+	display: inline-block;
+	min-height: 8vw;
+	min-width: 8vw;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+#calendar div {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 3vw;
+	line-height: 2.5vw;
+	padding: 0.5vw;
 }
 
 #mainGui {
@@ -76,7 +115,7 @@ html, body {
 
 #tools {
 	height: auto;
-	background-color: rgba(240,182,127,1);
+	background-color: rgba(240,182,127,0.5);
 	pointer-events: all;
 }
 
