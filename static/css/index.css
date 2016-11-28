@@ -82,7 +82,8 @@ body {
 	background-color: black;
 }
 
-#calendar h1 {
+.countdownDisp {
+	font-size: 3.5vw;
 	text-align: center;
 }
 
@@ -124,7 +125,7 @@ body {
 	position: absolute;
 	z-index: 10;
 	width: 100%;
-	bottom: 40px;
+	bottom: 5vh;
 	pointer-events: none;
 }
 
@@ -158,16 +159,21 @@ body {
 #subtools {
 	float: left;
 	height: 100%;
-	width: 200px;
+	width: 190px;
 	background-color: rgba(199,239,207,1);
 	transition: 0.3s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
 	overflow: hidden;
 	pointer-events: all;
+	padding-left: 10px;
 }
 
-#subtools div {
-	margin: 10px;
+#subtools>div:not(.specialTools) {
+	display: inline-block;
+	padding: 4px 8px;
+	border-radius: 5px;
+	margin: 5px;
+	background-color: rgba(238,245,219,1);
 }
 
 .hidden {
@@ -184,35 +190,44 @@ body {
 }
 
 #footer {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
-	width: 100%;
-	overflow: hidden;
-	height: 40px;
+	right: 0;
+	left: 0;
+	height: 5vh;
 	background-color: black;
 	color: white;
-	line-height: 40px;
+	font-size: 2vh;
+	line-height: 5vh;
 }
 
 .outlineText {
-	text-shadow: black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px,
-				black 0px 0px 1.5px
+	text-shadow: black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw,
+				black 0px 0px 0.1vw
 	;
 	-webkit-font-smoothing: antialiased;
 }

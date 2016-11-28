@@ -1,10 +1,13 @@
+var today;
+var xmasDay;
+
 window.addEventListener("load", function() {
-    var today = new Date();
-    var xmasDay = new Date();
+    today = new Date();
+    xmasDay = new Date();
     xmasDay.setMonth(11);
     xmasDay.setDate(25);
     var daysLeft = new Date(xmasDay.getTime() - today.getTime())/1000/60/60/24;
-    if(today.getMonth == 11) {
+    if(today.getMonth != 11) {
         $("#closedSign").show();
         $("#openSign").hide();
         $("#closedSign").children()[1].prepend(daysLeft);
@@ -27,6 +30,10 @@ $("#propBtn").click(function(e) {
     $("#properties").toggleClass("hidden");
 });
 
-$("#calendar li").one("click", function(e) {
-    $(this).addClass("opened");
+$("#calendar li").click(function(e) {
+    if(!($(this).hasClass("opened"))) {
+        if(today.getDate() == $(this).text()) {
+            $(this).addClass("opened");
+        }
+    }
 });
