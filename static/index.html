@@ -49,39 +49,39 @@
 		<div id="container">
 			<div id="mainGui">
 				<div id="subtools" class="">
-					<h1>Tools</h1>
-					<div class="specialTools">
-						<div class="eraser">Eraser</div>
-						<div class="size" id="dec">-</div>
-						<div class="size" id="inc">+</div>
-						<div class="rotate" id="left"><-</div>
-						<div class="rotate" id="right">-></div>
-					</div>
-					<h1>Stamps</h1>
-					<div class="stamp" id="cat"><img src="images/stamps/cat.png"/></div>
-					<div class="stamp" id="dog"><img src="images/stamps/dog.png"/></div>
-					<div class="stamp" id="tree"><img src="images/stamps/pointy_tree.png"/></div>
-					<div class="stamp" id="hat"><img src="images/stamps/round_santahat.png"/></div>
-					<h1>Brushes</h1>
-					<div id="colors">
-						<div class="brush" id="black"></div>
-						<div class="brush" id="white"></div>
-						<div class="brush" id="red"></div>
-						<div class="brush" id="green"></div>
-						<div class="brush" id="blue"></div>
-						<div class="brush" id="yellow"></div>
-						<div class="brush" id="magenta"></div>
-						<div class="brush" id="cyan"></div>
+					<div class="inner-container">
+						<h1>Tools</h1>
+						<div class="specialTools">
+							<div class="eraser">Eraser</div>
+							<div class="size" id="dec">-</div>
+							<div class="size" id="inc">+</div>
+							<div class="rotate" id="left"><-</div>
+							<div class="rotate" id="right">-></div>
+						</div>
+						<h1>Brushes</h1>
+						<div id="colors">
+							<div class="brush" id="black"></div>
+							<div class="brush" id="white"></div>
+							<div class="brush" id="red"></div>
+							<div class="brush" id="green"></div>
+							<div class="brush" id="blue"></div>
+							<div class="brush" id="yellow"></div>
+							<div class="brush" id="magenta"></div>
+							<div class="brush" id="cyan"></div>
+						</div>
+						<h1>Stamps</h1>
+						<div class="stamp" id="cat"><img src="images/stamps/cat.png"/></div>
+						<div class="stamp" id="dog"><img src="images/stamps/dog.png"/></div>
+						<div class="stamp" id="tree"><img src="images/stamps/pointy_tree.png"/></div>
+						<div class="stamp" id="hat"><img src="images/stamps/round_santahat.png"/></div>
 					</div>
 				</div>
-				<div id="properties" class="hidden"></div>
 				<div id="center">
 					<div id="tools">
 						<input type="file" id="fileInput" accept="image/*" onchange="handleFiles(this.files)" style="display: none;"/>
-						<div id="calBtn">Show Calendar</div>
-						<div id="subBtn">Show Subtools</div>
-						<div id="propBtn">Show Properties</div>
 						<div id="mainTools">
+							<div id="calBtn">Hide Calendar</div>
+							<div id="subBtn">Hide Subtools</div>
 							<div id="undoBtn">Undo</div>
 							<div id="clearBtn">Clear</div>
 							<div id="uploadBtn">Upload Background Image</div>

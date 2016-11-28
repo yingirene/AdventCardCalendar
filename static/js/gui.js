@@ -20,14 +20,20 @@ window.addEventListener("load", function() {
 
 $("#calBtn").click(function(e) {
     $("#calendar").toggleClass("slide-up");
+    if($("#calendar").hasClass("slide-up")) {
+        $(this).text("Show Calendar");
+    } else {
+        $(this).text("Hide Calendar");
+    }
 });
 
 $("#subBtn").click(function(e) {
     $("#subtools").toggleClass("hidden");
-});
-
-$("#propBtn").click(function(e) {
-    $("#properties").toggleClass("hidden");
+    if($("#subtools").hasClass("hidden")) {
+        $(this).text("Show Subtools");
+    } else {
+        $(this).text("Hide Subtools");
+    }
 });
 
 $("#calendar li").click(function(e) {

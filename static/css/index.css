@@ -30,6 +30,11 @@ body {
 	);
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
 .container {
 	display: flex;
 	justify-content: center;
@@ -56,7 +61,7 @@ body {
 #calendar {
 	position: absolute;
 	z-index: 20;
-	top: 10vh;
+	top: 12vh;
 	left: 0;
 	right: 0;
 	min-width: 50vw;
@@ -139,7 +144,6 @@ body {
 
 #center {
 	margin-left: 200px;
-	margin-right: 200px;
 	height: 100%;
 	z-index: -10;
 	position: relative;
@@ -150,6 +154,11 @@ body {
 	height: auto;
 	background-color: rgba(240,182,127,0.5);
 	pointer-events: all;
+}
+
+#tools >div>div {
+	background-color: pink;
+	border: 1px solid red;
 }
 
 #mainTools div {
@@ -165,15 +174,34 @@ body {
 }
 
 #subtools {
+	position: absolute;
 	float: left;
 	height: 100%;
+	left: 0;
 	width: 190px;
 	background-color: rgba(199,239,207,1);
-	transition: 0.3s ease-in-out;
+	transition: 0.8s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
 	overflow: hidden;
 	pointer-events: all;
-	padding-left: 10px;
+	padding: 0px 5px;
+}
+
+#subtools .inner-container {
+	margin: 0px 0px 0px 0px;
+	width: 110%;
+	max-height: 100%;
+	padding-right: 10%;
+	overflow-y: scroll;
+}
+
+#subtools div {
+	text-align: center;
+}
+
+#subtools h1 {
+	margin: 5px 0px 0px 5px;
+	text-align: left !important;
 }
 
 #subtools .stamp {
@@ -219,16 +247,8 @@ body {
 }
 
 .hidden {
-	width: 0 !important;
-}
-
-#properties {
-	float: right;
-	height: 100%;
-	width: 200px;
-	background-color: rgba(199,239,207,1);
-	transition: 0.3s ease-in-out;
-	border-radius: 20px 0px 0px 20px;
+	left: -100% !important;
+	/*width: 0 !important;*/
 }
 
 #footer {
