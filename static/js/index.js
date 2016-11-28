@@ -30,6 +30,7 @@ var bgObj = {};
 /* Brush Properties */
 var stamp = new Image();
 var stampSize = 0.5;
+var degrees = 0;
 var type = "brush";
 var value = colors["red"];
 var brushSize = 5;
@@ -91,6 +92,7 @@ $("#subtools div").click(function(e) {
 			break;
 		case "stamp":
 			stamp.src = stamps[$(this)[0].id];
+			degrees = 0;
 			break;
 		case "size":
 			if(type == "brush") {
@@ -104,6 +106,15 @@ $("#subtools div").click(function(e) {
 					stampSize+=0.05;
 				} else {
 					stampSize-=0.05;
+				}
+			}
+			break;
+		case "rotate":
+			if(type == "stamp") {
+				if($(this)[0].id == "right") {
+					degrees+=5;
+				} else {
+					degrees-=5;
 				}
 			}
 			break;
@@ -130,7 +141,7 @@ function addClick(x,y,dragging) {
 	clickType.push(type);
 	clickColor.push(value);
 	clickBrushSize.push(brushSize);
-	clickStamp.push([stamp.src, stampSize]);
+	clickStamp.push([stamp.src, stampSize, degrees]);
 }
 
 function redraw() {
@@ -150,12 +161,16 @@ function redraw() {
 		context.strokeStyle = clickColor[i];
 		context.lineWidth = clickBrushSize[i];
 		if(clickType[i] == "stamp") {
+			context.save();
 			context.globalCompositeOperation = "source-over";
 			var currStamp = new Image();
 			currStamp.src = clickStamp[i][0];
 			var scaledWidth = currStamp.width*clickStamp[i][1];
 			var scaledHeight = currStamp.height*clickStamp[i][1];
-			context.drawImage(currStamp, clickX[i]-(scaledWidth/2), clickY[i]-(scaledHeight/2), scaledWidth, scaledHeight);
+			context.translate(clickX[i], clickY[i]);
+			context.rotate(clickStamp[i][2]*Math.PI/180);
+			context.drawImage(currStamp, -(scaledWidth/2), -(scaledHeight/2), scaledWidth, scaledHeight);
+			context.restore();
 		} else {
 			if(clickType[i] == "eraser") {
 				context.globalCompositeOperation = "destination-out";
