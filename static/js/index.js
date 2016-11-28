@@ -1,5 +1,6 @@
 /* Colors */
 var colors = {
+	"clear" : "rgba(0,0,0,0)",
 	"black" : "rgba(0,0,0,1)",
 	"white" : "rgba(255,255,255,1)",
 	"red" : "rgba(255,0,0,1)",
@@ -78,6 +79,7 @@ $("#uploadBtn").click(function(e) {
 function handleFiles(e) {
 	var file = e[0];
 	var objectURL = window.URL.createObjectURL(file);
+	$("#mainCanvas").css("background-image", "url(" + objectURL + ")");
 	bgImage.src = objectURL;
 	bgImage.onload = function() {
 		bgObj["srcWidth"] = bgImage.width;
@@ -102,6 +104,9 @@ $("#subtools div").click(function(e) {
 		case "stamp":
 			stamp.src = stamps[$(this)[0].id];
 			degrees = 0;
+			break;
+		case "eraser":
+			value = colors["black"];
 			break;
 		case "size":
 			if(type == "brush") {
@@ -154,15 +159,8 @@ function addClick(x,y,dragging) {
 }
 
 function redraw() {
-	//context.clearRect(0,0,context.canvas.width, context.canvas.height);
-	context.fillStyle = colors["white"];
-	context.fillRect(0,0,context.canvas.width, context.canvas.height);
-	if(Object.keys(bgObj).length > 0) {
-		context.drawImage(bgImage,
-			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
-			0,0,context.canvas.width, context.canvas.height);
-	}
-
+	context.globalCompositeOperation = "source-over";
+	context.clearRect(0,0,context.canvas.width, context.canvas.height);
 	context.lineJoin = "round";
 	context.lineCap = "round";
 
@@ -322,3 +320,13 @@ $("#mainCanvas").mouseleave(function(e) {
 		});
 	}
 });
+
+function saveImage() {
+	context.fillStyle = colors["white"];
+	context.fillRect(0,0,context.canvas.width, context.canvas.height);
+	if(Object.keys(bgObj).length > 0) {
+		context.drawImage(bgImage,
+			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
+			0,0,context.canvas.width, context.canvas.height);
+	}
+}
