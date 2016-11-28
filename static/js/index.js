@@ -29,6 +29,7 @@ var bgObj = {};
 
 /* Brush Properties */
 var stamp = new Image();
+var stampSize = 0.5;
 var type = "brush";
 var value = colors["red"];
 var brushSize = 5;
@@ -79,8 +80,12 @@ function handleFiles(e) {
 
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
-	type = $(this)[0].className;
-	switch(type) {
+	var temp = $(this)[0].className;
+	var tools = ["brush", "stamp"];
+	if(tools.indexOf(temp) >= 0) {
+		type = $(this)[0].className;
+	}
+	switch(temp) {
 		case "brush":
 			value = colors[$(this)[0].id];
 			break;
@@ -88,10 +93,18 @@ $("#subtools div").click(function(e) {
 			stamp.src = stamps[$(this)[0].id];
 			break;
 		case "size":
-			if($(this)[0].id == "inc") {
-				brushSize++;
-			} else {
-				brushSize--;
+			if(type == "brush") {
+				if($(this)[0].id == "inc") {
+					brushSize++;
+				} else {
+					brushSize--;
+				}
+			} else if(type == "stamp") {
+				if($(this)[0].id == "inc") {
+					stampSize+=0.05;
+				} else {
+					stampSize-=0.05;
+				}
 			}
 			break;
 		case "frame":
@@ -117,7 +130,7 @@ function addClick(x,y,dragging) {
 	clickType.push(type);
 	clickColor.push(value);
 	clickBrushSize.push(brushSize);
-	clickStamp.push(stamp.src);
+	clickStamp.push([stamp.src, stampSize]);
 }
 
 function redraw() {
@@ -139,8 +152,10 @@ function redraw() {
 		if(clickType[i] == "stamp") {
 			context.globalCompositeOperation = "source-over";
 			var currStamp = new Image();
-			currStamp.src = clickStamp[i];
-			context.drawImage(currStamp, clickX[i]-(currStamp.width/2), clickY[i]-(currStamp.height/2), currStamp.width, currStamp.height);
+			currStamp.src = clickStamp[i][0];
+			var scaledWidth = currStamp.width*clickStamp[i][1];
+			var scaledHeight = currStamp.height*clickStamp[i][1];
+			context.drawImage(currStamp, clickX[i]-(scaledWidth/2), clickY[i]-(scaledHeight/2), scaledWidth, scaledHeight);
 		} else {
 			if(clickType[i] == "eraser") {
 				context.globalCompositeOperation = "destination-out";
