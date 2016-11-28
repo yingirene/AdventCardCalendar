@@ -56,6 +56,7 @@ a {
 	-o-background-size: cover;
 	background-size: cover;
 	background-position: center center;
+	cursor: default;
 }
 
 #calendar {
@@ -189,7 +190,7 @@ a {
 
 #subtools .inner-container {
 	margin: 0px 0px 0px 0px;
-	width: 110%;
+	width: 100%;
 	max-height: 100%;
 	padding-right: 10%;
 	overflow-y: scroll;
@@ -234,7 +235,7 @@ a {
 	border-radius: 10%;
 }
 
-#colors div {
+.colors div {
 	display: inline-block;
 	border-radius: 5px;
 	padding: 15px;

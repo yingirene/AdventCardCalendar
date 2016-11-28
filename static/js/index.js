@@ -39,11 +39,15 @@ var brushSize = 5;
 window.onload = function() {
 	console.log("It begins.");
 	/* Display Brush Colors in subtool pane */
-	var colorDisp = document.getElementsByClassName("brush");
+	var colorDisp = document.getElementsByClassName("colors");
 	for(var i = 0; i < colorDisp.length; i++) {
 		var item = colorDisp[i];
 		item.style.backgroundColor = colors[item.id];
 	}
+
+	$(".colors>div").each(function(e) {
+		$(this)[0].style.backgroundColor = colors[$(this)[0].id];
+	});
 
 	$("#canvas").draggable({
 		cursor: "move"
@@ -84,6 +88,7 @@ $("#subtools div").click(function(e) {
 		case "stamp":
 			stamp.src = stamps[$(this)[0].id];
 			degrees = 0;
+			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
 			break;
 		case "eraser":
 			value = colors["black"];
@@ -303,8 +308,15 @@ $("#saveBtn a").click(function(e) {
 
 });
 
+$(".bg").click(function(e) {
+    $("#mainCanvas").css("background-url", "none");
+	$("#mainCanvas").css("background-color", colors[$(this)[0].id]);
+	bgColor = colors[$(this)[0].id];
+});
+
 var bgImage = new Image();
 var bgObj = {};
+var bgColor = colors["white"];
 
 function handleFiles(e) {
 	var file = e[0];
@@ -327,7 +339,7 @@ function saveImage() {
 	saveCanvas.width = width;
 	saveCanvas.height = height;
 
-	saveContext.fillStyle = colors["white"];
+	saveContext.fillStyle = bgColor;
 	saveContext.fillRect(0,0,saveCanvas.width, saveCanvas.height);
 	if(Object.keys(bgObj).length > 0) {
 		saveContext.drawImage(bgImage,
