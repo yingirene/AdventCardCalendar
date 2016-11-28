@@ -299,11 +299,11 @@ $("#mainCanvas").mouseleave(function(e) {
 
 $("#uploadBtn").click(function(e) {
     $("#fileInput").click();
+	bgIsColor = false;
 });
 
 /* BG image handlers */
 $("#saveBtn a").click(function(e) {
-	//$(this).href = saveImage();
 	$(this).attr("href", saveImage());
 
 });
@@ -312,11 +312,13 @@ $(".bg").click(function(e) {
     $("#mainCanvas").css("background-image", "");
 	$("#mainCanvas").css("background-color", colors[$(this)[0].id]);
 	bgColor = colors[$(this)[0].id];
+	bgIsColor = true;
 });
 
 var bgImage = new Image();
 var bgObj = {};
 var bgColor = colors["white"];
+var bgIsColor = true;
 
 function handleFiles(e) {
 	var file = e[0];
@@ -328,6 +330,12 @@ function handleFiles(e) {
 		bgObj["srcHeight"] = bgImage.width * aspectRatio;
 		bgObj["srcX"] = 0;
 		bgObj["srcY"] = (bgImage.height - bgObj["srcHeight"])/2;
+		if(bgObj["srcHeight"] > bgImage.height) {
+			bgObj["srcWidth"] = bgImage.height/aspectRatio;
+			bgObj["srcHeight"] = bgImage.height;
+			bgObj["srcX"] = (bgImage.width - bgObj["srcWidth"])/2;
+			bgObj["srcY"] = 0;
+		}
 		redraw();
 	}
 }
@@ -338,13 +346,17 @@ function saveImage() {
 	var saveContext = saveCanvas.getContext("2d");
 	saveCanvas.width = width;
 	saveCanvas.height = height;
+	console.log(width + ", " + height);
+	console.log($("#mainCanvas").width() + ", " + $("#mainCanvas").height());
 
 	saveContext.fillStyle = bgColor;
 	saveContext.fillRect(0,0,saveCanvas.width, saveCanvas.height);
-	if(Object.keys(bgObj).length > 0) {
-		saveContext.drawImage(bgImage,
-			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
-			0,0,saveCanvas.width, saveCanvas.height);
+	if(!bgIsColor) {
+		if(Object.keys(bgObj).length > 0) {
+			saveContext.drawImage(bgImage,
+				bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
+				0,0,saveCanvas.width, saveCanvas.height);
+		}
 	}
 	saveContext.drawImage(canvas,0,0);
 	return saveCanvas.toDataURL();
