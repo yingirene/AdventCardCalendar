@@ -14,7 +14,8 @@ var colors = {
 var stamps = {
 	"cat" : "images/stamps/cat.png",
 	"dog" : "images/stamps/dog.png",
-	"tree" : "images/stamps/pointy_tree.png"
+	"tree" : "images/stamps/pointy_tree.png",
+	"hat" : "images/stamps/round_santahat.png"
 };
 
 var aspectRatio = 2/3; //yRatio/xRatio
@@ -35,8 +36,16 @@ var type = "brush";
 var value = colors["red"];
 var brushSize = 5;
 
+/* Run when window loads */
 window.onload = function() {
 	console.log("It begins.");
+	/* Display Brush Colors in subtool pane */
+	var colorDisp = document.getElementsByClassName("brush");
+	for(var i = 0; i < colorDisp.length; i++) {
+		var item = colorDisp[i];
+		item.style.backgroundColor = colors[item.id];
+	}
+
 	$("#canvas").draggable({
 		cursor: "move"
 	});
@@ -82,7 +91,7 @@ function handleFiles(e) {
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
 	var temp = $(this)[0].className;
-	var tools = ["brush", "stamp"];
+	var tools = ["brush", "stamp", "eraser"];
 	if(tools.indexOf(temp) >= 0) {
 		type = $(this)[0].className;
 	}

@@ -168,12 +168,46 @@ body {
 	padding-left: 10px;
 }
 
-#subtools>div:not(.specialTools) {
+#subtools .stamp {
 	display: inline-block;
-	padding: 4px 8px;
+	border: 5px solid rgba(238,245,219,1);
 	border-radius: 5px;
+	max-width: 57px;
+	max-height: 57px;
+	overflow: hidden;
 	margin: 5px;
 	background-color: rgba(238,245,219,1);
+}
+
+#subtools .stamp img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.specialTools {
+	width: 90%;
+	margin: 0 auto;
+	text-align-last: justify;
+}
+
+.specialTools>div {
+	display: inline-block;
+	padding: 5px;
+	border: 1px solid black;
+	background-color: rgba(238,245,219,1);
+	border-radius: 10%;
+}
+
+#colors div {
+	display: inline-block;
+	border-radius: 5px;
+	padding: 15px;
+	border-radius: 100%;
+	border: 1px solid;
+	max-width: 57px;
+	max-height: 57px;
+	overflow: hidden;
+	margin: 5px;
 }
 
 .hidden {
