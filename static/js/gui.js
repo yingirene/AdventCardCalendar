@@ -28,11 +28,15 @@ $("#calBtn").click(function(e) {
 });
 
 $("#subBtn").click(function(e) {
+    console.log("dggf");
     $("#subtools").toggleClass("hidden");
+    $(".container").toggleClass("expand");
+    $("#center").toggleClass("expand");
+    $("#subBtn").toggleClass("expand");
     if($("#subtools").hasClass("hidden")) {
-        $(this).text("Show Subtools");
+        $(this).html("<i class='fa fa-caret-right' aria-hidden='true'></i>");
     } else {
-        $(this).text("Hide Subtools");
+        $(this).html("<i class='fa fa-caret-left' aria-hidden='true'></i>");
     }
 });
 
@@ -42,4 +46,10 @@ $("#calendar li").click(function(e) {
             $(this).addClass("opened");
         }
     }
+});
+
+$("#customText").click(function(e) {
+    e.preventDefault();
+    $(".text").toggle();
+    $("#inputText").toggle();
 });

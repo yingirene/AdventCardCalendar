@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>Advent Calendar 2016</title>
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</head>
@@ -48,46 +49,31 @@
 		</div>
 		<div id="container">
 			<div id="mainGui">
+				<div id="subBtn"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
 				<div id="subtools" class="">
 					<div class="inner-container">
 						<h1>Tools</h1>
 						<div class="specialTools">
-							<div class="eraser">Eraser</div>
-							<div class="reverse">Reverse</div>
-							<div class="size" id="dec">-</div>
-							<div class="size" id="inc">+</div>
-							<div class="rotate" id="left"><-</div>
-							<div class="rotate" id="right">-></div>
-							<div class="text" id="stroke">Stroke Text</div>
-							<div class="text" id="fill">Fill Text</div>
-							<div class="" id="inputText"><textarea></textarea></div>
+							<div class="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></div>
+							<div class="reverse"><i class="fa fa-arrows-h" aria-hidden="true"></i></div>
+							<div class="size" id="dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
+							<div class="size" id="inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
+							<div class="rotate" id="left"><i class="fa fa-rotate-left" aria-hidden="true"></i></div>
+							<div class="rotate" id="right"><i class="fa fa-rotate-right" aria-hidden="true"></i></div>
+							<a href="#" id="customText"><i class="fa fa-font" aria-hidden="true"></i></a>
+							<div class="" id="inputText" style="display: none;"><textarea></textarea></div>
+							<div class="text" id="stroke" style="display: none;">Stroke Text</div>
+							<div class="text" id="fill" style="display: none;">Fill Text</div>
+							<div class="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></div>
 						</div>
-						<h1>Brushes</h1>
-						<div class="colors">
-							<div class="brush" id="black"></div>
-							<div class="brush" id="white"></div>
-							<div class="brush" id="red"></div>
-							<div class="brush" id="green"></div>
-							<div class="brush" id="blue"></div>
-							<div class="brush" id="yellow"></div>
-							<div class="brush" id="magenta"></div>
-							<div class="brush" id="cyan"></div>
-						</div>
-						<h1>Stamps</h1>
-						<div class="stamp" id="cat"><img src="images/stamps/animal_cat.png"/></div>
-						<div class="stamp" id="dog"><img src="images/stamps/dog.png"/></div>
-						<div class="stamp" id="tree"><img src="images/stamps/pointy_tree.png"/></div>
-						<div class="stamp" id="hat"><img src="images/stamps/round_santahat.png"/></div>
-						<h1>Backgrounds</h1>
-						<div class="colors">
-							<div class="bg" id="black"></div>
-							<div class="bg" id="white"></div>
-							<div class="bg" id="red"></div>
-							<div class="bg" id="green"></div>
-							<div class="bg" id="blue"></div>
-							<div class="bg" id="yellow"></div>
-							<div class="bg" id="magenta"></div>
-							<div class="bg" id="cyan"></div>
+						<div class="otherTools">
+							<h1>Stamps<i class="fa fa-smile-o" aria-hidden="true"></i></h1>
+							<div class="stamp" id="cat"><img src="images/stamps/animal_cat.png"/></div>
+							<div class="stamp" id="dog"><img src="images/stamps/animal_dog.png"/></div>
+							<div class="stamp" id="tree"><img src="images/stamps/tree_pointy.png"/></div>
+							<div class="stamp" id="hat"><img src="images/stamps/hat_santa_round.png"/></div>
+							<h1>Backgrounds<i class="fa fa-photo" aria-hidden="true"></i></h1>
+							<div>TBA</div>
 						</div>
 					</div>
 				</div>
@@ -96,11 +82,21 @@
 						<input type="file" id="fileInput" accept="image/*" onchange="handleFiles(this.files)" style="display: none;"/>
 						<div id="mainTools">
 							<div id="calBtn">Hide Calendar</div>
-							<div id="subBtn">Hide Subtools</div>
 							<div id="undoBtn">Undo</div>
-							<div id="clearBtn">Clear</div>
+							<div id="clearBtn"><i class="fa fa-trash" aria-hidden="true"></i></div>
 							<div id="uploadBtn">Upload Background Image</div>
-							<div id="saveBtn"><a target="about:blank" href="#" download="christmasCard.png">Save Image</a></div>
+							<div id="fillBG" class="bg">Fill Background with Color</div>
+							<div id="saveBtn"><a target="about:blank" href="#" download="christmasCard.png"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></div>
+						</div>
+						<div class="colors">
+							<div id="black"></div>
+							<div id="white"></div>
+							<div id="red"></div>
+							<div id="green"></div>
+							<div id="blue"></div>
+							<div id="yellow"></div>
+							<div id="magenta"></div>
+							<div id="cyan"></div>
 						</div>
 					</div>
 					<div id="misc"></div>

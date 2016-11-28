@@ -40,8 +40,35 @@ a {
 	justify-content: center;
 	align-items: center;
 	margin-left: 200px;
+	transition: 0.5s ease-in-out;
 	width: auto;
 	height: 100%;
+}
+
+#subBtn {
+	z-index: 100000;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 20px;
+	margin-left: 200px;
+	pointer-events: all;
+	transition: 0.5s ease-in-out;
+	font-size: 20px;
+	color: rgba(238,245,219,1);
+}
+
+#subBtn i {
+	padding-top: 5vh;
+	padding-left: 6px;
+}
+
+.container.expand {
+	margin-left: 0px !important;
+}
+
+#subBtn.expand {
+	margin-left: 0px !important;
 }
 
 #canvas {
@@ -150,6 +177,11 @@ a {
 	z-index: -10;
 	position: relative;
 	pointer-events: none;
+	transition: 0.5s ease-in-out;
+}
+
+#center.expand {
+	margin-left: 0px !important;
 }
 
 #tools {
@@ -161,7 +193,7 @@ a {
 
 #tools >div>div {
 	background-color: pink;
-	border: 1px solid red;
+	border: 1px solid black;
 }
 
 #mainTools div {
@@ -183,11 +215,14 @@ a {
 	left: 0;
 	width: 190px;
 	background-color: rgba(199,239,207,1);
-	transition: 0.8s ease-in-out;
+	transition: 0.5s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
 	overflow: hidden;
 	pointer-events: all;
 	padding: 0px 5px;
+	border-right: 20px solid rgba(240,182,127,0.5);
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
+
 }
 
 #subtools .inner-container {
@@ -224,9 +259,20 @@ a {
 }
 
 .specialTools {
-	width: 90%;
+	width: 95%;
 	margin: 0 auto;
-	text-align-last: justify;
+	text-align: justify;
+	text-align-last: center;
+}
+
+.specialTools a {
+	display: inline-block;
+	text-align: center;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: rgba(238,245,219,1);
+	margin-bottom: 5px;
 }
 
 .specialTools>div {
@@ -234,7 +280,16 @@ a {
 	padding: 5px;
 	border: 1px solid black;
 	background-color: rgba(238,245,219,1);
-	border-radius: 10%;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+
+.otherTools>div {
+	display: inline-block;
+	padding: 5px;
+	background-color: rgba(238,245,219,1);
+	border-radius: 5px;
+	margin-bottom: 5px;
 }
 
 .colors div {
@@ -247,10 +302,11 @@ a {
 	max-height: 57px;
 	overflow: hidden;
 	margin: 5px;
+	border: 1px solid black;
 }
 
 .hidden {
-	left: -100% !important;
+	left: -200px !important;
 	/*width: 0 !important;*/
 }
 

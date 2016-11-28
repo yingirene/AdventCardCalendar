@@ -11,14 +11,6 @@ var colors = {
 	"cyan" : "rgba(0,255,255,1)"
 };
 
-/* Stamps */
-var stamps = {
-	"cat" : "images/stamps/animal_cat.png",
-	"dog" : "images/stamps/dog.png",
-	"tree" : "images/stamps/pointy_tree.png",
-	"hat" : "images/stamps/round_santahat.png"
-};
-
 var aspectRatio = 2/3; //yRatio/xRatio
 var scale = 900;
 var width = scale;
@@ -43,14 +35,16 @@ var drawReverse = false;
 window.onload = function() {
 	console.log("It begins.");
 	/* Display Brush Colors in subtool pane */
+	/*
 	var colorDisp = document.getElementsByClassName("colors");
 	for(var i = 0; i < colorDisp.length; i++) {
 		var item = colorDisp[i];
 		item.style.backgroundColor = colors[item.id];
-	}
+	}*/
 
 	$(".colors>div").each(function(e) {
 		$(this)[0].style.backgroundColor = colors[$(this)[0].id];
+		$(this)[0].style.color = colors[$(this)[0].id];
 	});
 
 	$("#canvas").draggable({
@@ -85,6 +79,10 @@ function resetTools() {
 }
 
 /* Tool Listeners*/
+$(".colors div").click(function(e) {
+	value = colors[$(this)[0].id];
+});
+
 $("#subtools div").click(function(e) {
 	var temp = $(this)[0].className;
 	var tools = ["brush", "stamp", "eraser", "text"];
@@ -94,7 +92,6 @@ $("#subtools div").click(function(e) {
 	}
 	switch(temp) {
 		case "brush":
-			value = colors[$(this)[0].id];
 			break;
 		case "stamp":
 			//stamp.src = stamps[$(this)[0].id];
@@ -106,7 +103,10 @@ $("#subtools div").click(function(e) {
 			value = colors["black"];
 			break;
 		case "text":
+			$(".text").hide();
+		    $("#inputText").hide();
 			text = $("#inputText textarea").val();
+			$("#inputText textarea").val("");
 			textStyle = $(this)[0].id;
 			break;
 		case "size":
@@ -375,8 +375,8 @@ $("#saveBtn a").click(function(e) {
 
 $(".bg").click(function(e) {
     $("#mainCanvas").css("background-image", "");
-	$("#mainCanvas").css("background-color", colors[$(this)[0].id]);
-	bgColor = colors[$(this)[0].id];
+	$("#mainCanvas").css("background-color", value);
+	bgColor = value;
 	bgIsColor = true;
 });
 
