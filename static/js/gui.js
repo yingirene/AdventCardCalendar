@@ -6,7 +6,7 @@ window.addEventListener("load", function() {
     xmasDay = new Date();
     xmasDay.setMonth(11);
     xmasDay.setDate(25);
-    var daysLeft = new Date(xmasDay.getTime() - today.getTime())/1000/60/60/24;
+    var daysLeft = Math.round(new Date(xmasDay.getTime() - today.getTime())/(1000*60*60*24));
     if(today.getMonth != 11) {
         $("#closedSign").show();
         $("#openSign").hide();

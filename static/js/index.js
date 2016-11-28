@@ -13,7 +13,7 @@ var colors = {
 
 /* Stamps */
 var stamps = {
-	"cat" : "images/stamps/cat.png",
+	"cat" : "images/stamps/animal_cat.png",
 	"dog" : "images/stamps/dog.png",
 	"tree" : "images/stamps/pointy_tree.png",
 	"hat" : "images/stamps/round_santahat.png"
@@ -29,11 +29,15 @@ var canvas, context;
 
 /* Brush Properties */
 var stamp = new Image();
-var stampSize = 0.5;
+var stampScale = 0.1;
 var degrees = 0;
 var type = "brush";
 var value = colors["red"];
 var brushSize = 5;
+var text = "";
+var textStyle = "fill";
+
+var drawReverse = false;
 
 /* Run when window loads */
 window.onload = function() {
@@ -62,7 +66,7 @@ window.onload = function() {
 };
 
 function prepareCanvas() {
-	stamp.src = "images/stamps/cat.png";
+	stamp.src = stamps["cat"];
 }
 
 /* Event Listeners */
@@ -74,12 +78,19 @@ $("#clearBtn").click(function(e) {
 	clear();
 });
 
+function resetTools() {
+	degrees = 0;
+	brushSize = 5;
+	drawReverse = false;
+}
+
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
 	var temp = $(this)[0].className;
-	var tools = ["brush", "stamp", "eraser"];
+	var tools = ["brush", "stamp", "eraser", "text"];
 	if(tools.indexOf(temp) >= 0) {
 		type = $(this)[0].className;
+		resetTools();
 	}
 	switch(temp) {
 		case "brush":
@@ -93,29 +104,28 @@ $("#subtools div").click(function(e) {
 		case "eraser":
 			value = colors["black"];
 			break;
+		case "text":
+			text = $("#inputText textarea").val();
+			textStyle = $(this)[0].id;
+			break;
 		case "size":
-			if(type == "brush") {
-				if($(this)[0].id == "inc") {
-					brushSize++;
-				} else {
-					brushSize--;
-				}
-			} else if(type == "stamp") {
-				if($(this)[0].id == "inc") {
-					stampSize+=0.05;
-				} else {
-					stampSize-=0.05;
-				}
+			if($(this)[0].id == "inc") {
+				brushSize++;
+			} else {
+				brushSize--;
 			}
 			break;
 		case "rotate":
-			if(type == "stamp") {
+			if(type == "stamp" || type == "text") {
 				if($(this)[0].id == "right") {
 					degrees+=5;
 				} else {
 					degrees-=5;
 				}
 			}
+			break;
+		case "reverse":
+			drawReverse = !drawReverse;
 			break;
 		case "frame":
 			break;
@@ -131,6 +141,8 @@ var clickType = new Array();
 var clickColor = new Array();
 var clickBrushSize = new Array();
 var clickStamp = new Array();
+var clickText = new Array();
+var clickReverse = new Array();
 var paint;
 
 function addClick(x,y,dragging) {
@@ -140,7 +152,9 @@ function addClick(x,y,dragging) {
 	clickType.push(type);
 	clickColor.push(value);
 	clickBrushSize.push(brushSize);
-	clickStamp.push([stamp.src, stampSize, degrees]);
+	clickStamp.push([stamp.src, degrees]);
+	clickText.push([text, textStyle]);
+	clickReverse.push(drawReverse);
 }
 
 function redraw() {
@@ -157,11 +171,33 @@ function redraw() {
 			context.globalCompositeOperation = "source-over";
 			var currStamp = new Image();
 			currStamp.src = clickStamp[i][0];
-			var scaledWidth = currStamp.width*clickStamp[i][1];
-			var scaledHeight = currStamp.height*clickStamp[i][1];
+			var scaledWidth = currStamp.width*stampScale*clickBrushSize[i];
+			var scaledHeight = currStamp.height*stampScale*clickBrushSize[i];
 			context.translate(clickX[i], clickY[i]);
-			context.rotate(clickStamp[i][2]*Math.PI/180);
-			context.drawImage(currStamp, -(scaledWidth/2), -(scaledHeight/2), scaledWidth, scaledHeight);
+			context.rotate(clickStamp[i][1]*Math.PI/180);
+			if(clickReverse[i]) {
+				context.scale(-1, 1);
+				context.drawImage(currStamp, -(scaledWidth/2), -(scaledHeight/2), scaledWidth, scaledHeight);
+				context.scale(-1, 1);
+			} else {
+				context.drawImage(currStamp, -(scaledWidth/2), -(scaledHeight/2), scaledWidth, scaledHeight);
+			}
+			context.restore();
+		} else if(clickType[i] == "text") {
+			context.save();
+			context.globalCompositeOperation = "source-over";
+			var currStamp = new Image();
+			context.translate(clickX[i], clickY[i]);
+			context.rotate(clickStamp[i][1]*Math.PI/180);
+			context.font = (clickBrushSize[i] * 15) + "px serif";
+			context.textAlign = "center";
+			context.textBaseline = "middle";
+			if(clickText[i][1] == "fill") {
+				context.fillText(clickText[i][0], 0, 0);
+			} else {
+				context.lineWidth = 1;
+				context.strokeText(clickText[i][0], 0, 0);
+			}
 			context.restore();
 		} else {
 			if(clickType[i] == "eraser") {
@@ -190,6 +226,8 @@ function clear() {
 	clickType = new Array();
 	clickColor = new Array();
 	clickStamp = new Array();
+	clickText = new Array();
+	clickReverse = new Array();
 	clickHist.push({
 		"clickX": clickX.slice(),
 		"clickY": clickY.slice(),
@@ -197,7 +235,9 @@ function clear() {
 		"clickType": clickType.slice(),
 		"clickColor": clickColor.slice(),
 		"clickBrushSize": clickBrushSize.slice(),
-		"clickStamp": clickStamp.slice()
+		"clickStamp": clickStamp.slice(),
+		"clickText": clickText.slice(),
+		"clickReverse": clickReverse.slice()
 	});
 }
 
@@ -211,6 +251,8 @@ function redrawHistory() {
 	clickColor = item["clickColor"].slice();
 	clickBrushSize = item["clickBrushSize"].slice();
 	clickStamp = item["clickStamp"].slice();
+	clickText = item["clickText"].slice();
+	clickReverse = item["clickReverse"].slice();
 	redraw();
 }
 
@@ -277,7 +319,9 @@ $("#mainCanvas").mouseup(function(e) {
 			"clickType": clickType.slice(),
 			"clickColor": clickColor.slice(),
 			"clickBrushSize": clickBrushSize.slice(),
-			"clickStamp": clickStamp.slice()
+			"clickStamp": clickStamp.slice(),
+			"clickText": clickText.slice(),
+			"clickReverse": clickReverse.slice()
 		});
 	}
 });
@@ -292,7 +336,9 @@ $("#mainCanvas").mouseleave(function(e) {
 			"clickType": clickType.slice(),
 			"clickColor": clickColor.slice(),
 			"clickBrushSize": clickBrushSize.slice(),
-			"clickStamp": clickStamp.slice()
+			"clickStamp": clickStamp.slice(),
+			"clickText": clickText.slice(),
+			"clickReverse": clickReverse.slice()
 		});
 	}
 });
