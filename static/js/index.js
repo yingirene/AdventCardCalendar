@@ -26,8 +26,6 @@ var height = scale * aspectRatio;
 var isLandscape = true;
 
 var canvas, context;
-var bgImage = new Image();
-var bgObj = {};
 
 /* Brush Properties */
 var stamp = new Image();
@@ -69,26 +67,8 @@ $("#undoBtn").click(function(e) {
 });
 
 $("#clearBtn").click(function(e) {
-	clear(true);
+	clear();
 });
-
-$("#uploadBtn").click(function(e) {
-    $("#fileInput").click();
-});
-
-function handleFiles(e) {
-	var file = e[0];
-	var objectURL = window.URL.createObjectURL(file);
-	$("#mainCanvas").css("background-image", "url(" + objectURL + ")");
-	bgImage.src = objectURL;
-	bgImage.onload = function() {
-		bgObj["srcWidth"] = bgImage.width;
-		bgObj["srcHeight"] = bgImage.width * aspectRatio;
-		bgObj["srcX"] = 0;
-		bgObj["srcY"] = (bgImage.height - bgObj["srcHeight"])/2;
-		redraw();
-	}
-}
 
 /* Tool Listeners*/
 $("#subtools div").click(function(e) {
@@ -197,17 +177,8 @@ function redraw() {
 	}
 }
 
-function clear(clearAll) {
+function clear() {
 	context.clearRect(0,0,context.canvas.width, context.canvas.height);
-	if(!clearAll) {
-		context.fillStyle = colors["white"];
-		context.fillRect(0,0,context.canvas.width, context.canvas.height);
-		if(Object.keys(bgObj).length > 0) {
-			context.drawImage(bgImage,
-				bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
-				0,0,context.canvas.width, context.canvas.height);
-		}
-	}
 	clickX = new Array();
 	clickY = new Array();
 	clickDrag = new Array();
@@ -243,7 +214,7 @@ function undo() {
 	if(clickHist.length > 0) {
 		redrawHistory();
 	} else if(clickHist.length == 0) {
-		clear(false);
+		clear();
 	} else {
 		console.log("Nothing left to undo.");
 	}
@@ -321,12 +292,48 @@ $("#mainCanvas").mouseleave(function(e) {
 	}
 });
 
-function saveImage() {
-	context.fillStyle = colors["white"];
-	context.fillRect(0,0,context.canvas.width, context.canvas.height);
-	if(Object.keys(bgObj).length > 0) {
-		context.drawImage(bgImage,
-			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
-			0,0,context.canvas.width, context.canvas.height);
+$("#uploadBtn").click(function(e) {
+    $("#fileInput").click();
+});
+
+/* BG image handlers */
+$("#saveBtn a").click(function(e) {
+	//$(this).href = saveImage();
+	$(this).attr("href", saveImage());
+
+});
+
+var bgImage = new Image();
+var bgObj = {};
+
+function handleFiles(e) {
+	var file = e[0];
+	var objectURL = window.URL.createObjectURL(file);
+	$("#mainCanvas").css("background-image", "url(" + objectURL + ")");
+	bgImage.src = objectURL;
+	bgImage.onload = function() {
+		bgObj["srcWidth"] = bgImage.width;
+		bgObj["srcHeight"] = bgImage.width * aspectRatio;
+		bgObj["srcX"] = 0;
+		bgObj["srcY"] = (bgImage.height - bgObj["srcHeight"])/2;
+		redraw();
 	}
+}
+
+function saveImage() {
+	var saveCanvas = document.createElement("canvas");
+	saveCanvas.id = "toSave";
+	var saveContext = saveCanvas.getContext("2d");
+	saveCanvas.width = width;
+	saveCanvas.height = height;
+
+	saveContext.fillStyle = colors["white"];
+	saveContext.fillRect(0,0,saveCanvas.width, saveCanvas.height);
+	if(Object.keys(bgObj).length > 0) {
+		saveContext.drawImage(bgImage,
+			bgObj["srcX"], bgObj["srcY"], bgObj["srcWidth"], bgObj["srcHeight"],
+			0,0,saveCanvas.width, saveCanvas.height);
+	}
+	saveContext.drawImage(canvas,0,0);
+	return saveCanvas.toDataURL();
 }

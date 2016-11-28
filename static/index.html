@@ -85,6 +85,7 @@
 							<div id="undoBtn">Undo</div>
 							<div id="clearBtn">Clear</div>
 							<div id="uploadBtn">Upload Background Image</div>
+							<div id="saveBtn"><a target="about:blank" href="#" download="christmasCard.png">Save Image</a></div>
 						</div>
 					</div>
 					<div id="misc"></div>
@@ -95,8 +96,10 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/jquery.js"></script>
+	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/gui.js"></script>
+	<script>if (window.module) module = window.module;</script>
 </html>

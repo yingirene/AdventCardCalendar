@@ -50,16 +50,20 @@ body {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	background-position: center center;
 }
 
 #calendar {
 	position: absolute;
 	z-index: 20;
-	top: 15vh;
+	top: 10vh;
 	left: 0;
 	right: 0;
-	width: 50%;
+	min-width: 50vw;
+	max-width: 60vw;
 	height: auto;
+	max-height: 70vh;
+	overflow: hidden;
 	color: white;
 	background-color: rgba(254,95,85,1);
 	padding: 5vh 10vw;

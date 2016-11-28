@@ -10,11 +10,11 @@ window.addEventListener("load", function() {
     if(today.getMonth != 11) {
         $("#closedSign").show();
         $("#openSign").hide();
-        $("#closedSign").children()[1].prepend(daysLeft);
+        $("#closedSign .countdownDisp").prepend(daysLeft);
     } else {
         $("#closedSign").hide();
         $("#openSign").show();
-        $("#openSign").children()[0].prepend(daysLeft);
+        $("#openSign .countdownDisp").prepend(daysLeft);
     }
 }, false);
 
