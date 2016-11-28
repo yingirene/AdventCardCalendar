@@ -309,7 +309,7 @@ $("#saveBtn a").click(function(e) {
 });
 
 $(".bg").click(function(e) {
-    $("#mainCanvas").css("background-url", "none");
+    $("#mainCanvas").css("background-image", "");
 	$("#mainCanvas").css("background-color", colors[$(this)[0].id]);
 	bgColor = colors[$(this)[0].id];
 });
