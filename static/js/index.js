@@ -66,7 +66,7 @@ window.onload = function() {
 };
 
 function prepareCanvas() {
-	stamp.src = stamps["cat"];
+	stamp.src = "images/stamps/animal_cat.png";
 }
 
 /* Event Listeners */
@@ -97,7 +97,8 @@ $("#subtools div").click(function(e) {
 			value = colors[$(this)[0].id];
 			break;
 		case "stamp":
-			stamp.src = stamps[$(this)[0].id];
+			//stamp.src = stamps[$(this)[0].id];
+			stamp.src = $(this).children()[0].src;
 			degrees = 0;
 			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
 			break;
@@ -192,12 +193,30 @@ function redraw() {
 			context.font = (clickBrushSize[i] * 15) + "px serif";
 			context.textAlign = "center";
 			context.textBaseline = "middle";
+			if(clickReverse[i]) {
+				context.scale(-1, 1);
+				if(clickText[i][1] == "fill") {
+					context.fillText(clickText[i][0], 0, 0);
+				} else {
+					context.lineWidth = 1;
+					context.strokeText(clickText[i][0], 0, 0);
+				}
+				context.scale(-1, 1);
+			} else {
+				if(clickText[i][1] == "fill") {
+					context.fillText(clickText[i][0], 0, 0);
+				} else {
+					context.lineWidth = 1;
+					context.strokeText(clickText[i][0], 0, 0);
+				}
+			}
+			/*
 			if(clickText[i][1] == "fill") {
 				context.fillText(clickText[i][0], 0, 0);
 			} else {
 				context.lineWidth = 1;
 				context.strokeText(clickText[i][0], 0, 0);
-			}
+			}*/
 			context.restore();
 		} else {
 			if(clickType[i] == "eraser") {
