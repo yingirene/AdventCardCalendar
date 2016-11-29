@@ -11,6 +11,10 @@ var colors = {
 	"cyan" : "rgba(0,255,255,1)"
 };
 
+var pipe_popcorn = {
+
+};
+
 var aspectRatio = 2/3; //yRatio/xRatio
 var scale = 900;
 var width = scale;
@@ -77,35 +81,51 @@ $(".colors div").click(function(e) {
 });
 
 var prevButton;
-$(".specialTools>div").click(function(e) {
+
+$("#customText").click(function(e) {
+    e.preventDefault();
+    $(".text").toggle();
+    $("#inputText").toggle();
 	if(prevButton != null) {
 		prevButton.removeClass("selected");
 	}
-	$(this).addClass("selected");
+    $(this).addClass("selected");
 	prevButton = $(this);
 });
 
-$("#subtools div").click(function(e) {
+$(".specialTools>div").click(function(e) {
 	var temp = $(this)[0].className;
+	temp = temp.split(" ");
 	var tools = ["brush", "stamp", "eraser", "text"];
-	if(tools.indexOf(temp) >= 0) {
-		type = $(this)[0].className;
+	if(tools.indexOf(temp[0]) >= 0) {
+		type = temp[0];
 		resetTools();
 	}
-	switch(temp) {
-		case "brush":
-			break;
-		case "stamp":
-			stamp.src = $(this).children()[0].src;
-			degrees = 0;
-			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
-			break;
+
+	if(prevButton[0].id == "customText") {
+		$(".text").hide();
+	    $("#inputText").hide();
+	}
+
+	if($(this).parent()[0].id != "editTools") {
+		if(prevButton != null) {
+			prevButton.removeClass("selected");
+		}
+		var currButton = $(this);
+		if(!(currButton.hasClass("selected"))) {
+			currButton.addClass("selected");
+			prevButton = currButton;
+		}
+		resetTools();
+	}
+
+	switch(temp[0]) {
 		case "eraser":
 			value = colors["black"];
 			break;
 		case "text":
 			$(".text").hide();
-		    $("#inputText").hide();
+			$("#inputText").hide();
 			text = $("#inputText textarea").val();
 			$("#inputText textarea").val("");
 			textStyle = $(this)[0].id;
@@ -128,6 +148,22 @@ $("#subtools div").click(function(e) {
 			break;
 		case "reverse":
 			drawReverse = !drawReverse;
+			break;
+	}
+});
+
+$(".otherTools>div").click(function(e) {
+	var temp = $(this)[0].className;
+	temp = temp.split(" ");
+	var tools = ["brush", "stamp", "eraser", "text"];
+	if(tools.indexOf(temp[0]) >= 0) {
+		type = temp[0];
+		resetTools();
+	}
+	switch(temp[0]) {
+		case "stamp":
+			stamp.src = $(this).children()[0].src;
+			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
 			break;
 		case "frame":
 			break;
@@ -290,6 +326,9 @@ function undo() {
 /* Mouse Listeners */
 var isDrag = false;
 $(window).keydown(function(e) {
+	if($("textarea").is(":focus")) {
+		return;
+	}
 	if(e.which == 32) {
 		e.preventDefault();
 		$("#canvas").draggable('enable');

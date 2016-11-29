@@ -28,7 +28,6 @@ $("#calBtn").click(function(e) {
 });
 
 $("#subBtn").click(function(e) {
-    console.log("dggf");
     $("#subtools").toggleClass("hidden");
     $(".container").toggleClass("expand");
     $("#center").toggleClass("expand");
@@ -42,16 +41,14 @@ $("#subBtn").click(function(e) {
 
 $("#calendar li").click(function(e) {
     if(!($(this).hasClass("opened"))) {
-        if(today.getDate() == $(this).text()) {
+        if(today.getDate() != $(this).text()) {
             $(this).addClass("opened");
+            var dayList = document.getElementsByClassName($(this).text());
+            for(var i = 0; i < dayList.length; i++) {
+                dayList[i].className += " revert";
+            }
         }
     }
-});
-
-$("#customText").click(function(e) {
-    e.preventDefault();
-    $(".text").toggle();
-    $("#inputText").toggle();
 });
 
 $("#stampBtn").click(function(e) {

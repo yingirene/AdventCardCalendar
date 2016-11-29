@@ -16,7 +16,7 @@
 				<span>The calendar is closed until December!</span>
 				<h1 class="countdownDisp outlineText"> Days Left Until Christmas!<h1>
 			</div>
-			<div id="openSign" style="">
+			<div id="openSign" style="display: none;">
 				<h1 class="countdownDisp outlineText"> Days Left Until Christmas!<h1>
 				<ul>
 					<li><div>7</div></li>
@@ -55,40 +55,42 @@
 						<h1>Tools</h1>
 						<div class="specialTools">
 							<div class="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></div>
+							<div class="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></div>
+							<div id="stampBtn"><i class="fa fa-smile-o" aria-hidden="true"></i></div>
+							<div id="bgBtn"><i class="fa fa-photo" aria-hidden="true"></i></div>
+							<a href="#" id="customText"><i class="fa fa-font" aria-hidden="true"></i></a>
+							<div class="" id="inputText" style="display: none;"><textarea></textarea></div>
+							<div class="text" id="stroke" style="display: none;">Stroke Text</div>
+							<div class="text" id="fill" style="display: none;">Fill Text</div>
+						</div>
+						<div class="specialTools" id="editTools">
 							<div class="reverse"><i class="fa fa-arrows-h" aria-hidden="true"></i></div>
 							<div class="size" id="dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
 							<div class="size" id="inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 							<div class="rotate" id="left"><i class="fa fa-rotate-left" aria-hidden="true"></i></div>
 							<div class="rotate" id="right"><i class="fa fa-rotate-right" aria-hidden="true"></i></div>
-							<a href="#" id="customText"><i class="fa fa-font" aria-hidden="true"></i></a>
-							<div class="" id="inputText" style="display: none;"><textarea></textarea></div>
-							<div class="text" id="stroke" style="display: none;">Stroke Text</div>
-							<div class="text" id="fill" style="display: none;">Fill Text</div>
-							<div class="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></div>
-							<div id="stampBtn"><i class="fa fa-smile-o" aria-hidden="true"></i></div>
-							<div id="bgBtn"><i class="fa fa-photo" aria-hidden="true"></i></div>
 						</div>
 						<div class="otherTools hidden" id="stampDiv">
 							<h1>Stamps</h1>
-							<div class="stamp" id="cat"><img src="images/stamps/animal_cat.png"/></div>
-							<div class="stamp" id="dog"><img src="images/stamps/animal_dog.png"/></div>
-							<div class="stamp" id="tree"><img src="images/stamps/tree_pointy.png"/></div>
-							<div class="stamp" id="hat"><img src="images/stamps/hat_santa_round.png"/></div>
+							<div class="stamp 1" id="cat"><img src="images/stamps/animal_cat.png"/></div>
+							<div class="stamp 2" id="dog"><img src="images/stamps/animal_dog.png"/></div>
+							<div class="stamp 3" id="tree"><img src="images/stamps/tree_pointy.png"/></div>
+							<div class="stamp 4" id="hat"><img src="images/stamps/hat_santa_round.png"/></div>
 							<div class="stamp pipe" id="popcorn"><img src="images/stamps/pipe_popcorn_1.png"/></div>
 						</div><div class="otherTools hidden" id="bgDiv">
 							<h1>Backgrounds</h1>
-							<div class="bg"><img src="images/backgrounds/red_snow.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/red_snowflakes.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/livingroom.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/blue_frame.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/blue_horizon.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/blue_sparkles.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/purple_lace.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/white_forest_lumpy.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/white_forest.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/white_snowflakes_pile.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/white_snowflakes.jpg"/></div>
-							<div class="bg"><img src="images/backgrounds/white_lake.jpg"/></div>
+							<div class="bg 1"><img src="images/backgrounds/red_snow.jpg"/></div>
+							<div class="bg 2"><img src="images/backgrounds/red_snowflakes.jpg"/></div>
+							<div class="bg 3"><img src="images/backgrounds/livingroom.jpg"/></div>
+							<div class="bg 4"><img src="images/backgrounds/blue_frame.jpg"/></div>
+							<div class="bg 5"><img src="images/backgrounds/blue_horizon.jpg"/></div>
+							<div class="bg 6"><img src="images/backgrounds/blue_sparkles.jpg"/></div>
+							<div class="bg 7"><img src="images/backgrounds/purple_lace.jpg"/></div>
+							<div class="bg 8"><img src="images/backgrounds/white_forest_lumpy.jpg"/></div>
+							<div class="bg 9"><img src="images/backgrounds/white_forest.jpg"/></div>
+							<div class="bg 10"><img src="images/backgrounds/white_snowflakes_pile.jpg"/></div>
+							<div class="bg 11"><img src="images/backgrounds/white_snowflakes.jpg"/></div>
+							<div class="bg 12"><img src="images/backgrounds/white_lake.jpg"/></div>
 						</div>
 					</div>
 				</div>
@@ -119,6 +121,7 @@
 			</div>
 			<div id="footer">
 				<marquee>Merry Christmas!!!</marquee>
+				<embed src="music/InnerSplendor_TwelveDaysOfChristmas.mp3" width="180" height="90" loop="true" autostart="true" hidden="true" />
 			</div>
 		</div>
 	</body>
