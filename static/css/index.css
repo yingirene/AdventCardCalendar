@@ -258,11 +258,31 @@ a {
 	max-height: 100%;
 }
 
+#subtools .bg {
+	display: inline-block;
+	border: 5px solid rgba(238,245,219,1);
+	border-radius: 5px;
+	max-width: 62px;
+	max-height: 62px;
+	overflow: hidden;
+	margin: 5px;
+	padding: 0;
+	background-color: rgba(238,245,219,1);
+}
+
+#subtools .bg img {
+	max-height: 62px;
+}
+
 .specialTools {
 	width: 95%;
 	margin: 0 auto;
 	text-align: justify;
 	text-align-last: center;
+}
+
+.specialTools .selected {
+	background-color: rgba(240,182,127,0.5);
 }
 
 .specialTools a {
@@ -308,6 +328,10 @@ a {
 .hidden {
 	left: -200px !important;
 	/*width: 0 !important;*/
+}
+
+.otherTools.hidden {
+	display: none !important;
 }
 
 #footer {

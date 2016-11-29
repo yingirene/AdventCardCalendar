@@ -53,3 +53,13 @@ $("#customText").click(function(e) {
     $(".text").toggle();
     $("#inputText").toggle();
 });
+
+$("#stampBtn").click(function(e) {
+    $(".otherTools").addClass("hidden");
+    $("#stampDiv").toggleClass("hidden");
+});
+
+$("#bgBtn").click(function(e) {
+    $(".otherTools").addClass("hidden");
+    $("#bgDiv").toggleClass("hidden");
+});

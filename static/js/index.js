@@ -35,13 +35,6 @@ var drawReverse = false;
 window.onload = function() {
 	console.log("It begins.");
 	/* Display Brush Colors in subtool pane */
-	/*
-	var colorDisp = document.getElementsByClassName("colors");
-	for(var i = 0; i < colorDisp.length; i++) {
-		var item = colorDisp[i];
-		item.style.backgroundColor = colors[item.id];
-	}*/
-
 	$(".colors>div").each(function(e) {
 		$(this)[0].style.backgroundColor = colors[$(this)[0].id];
 		$(this)[0].style.color = colors[$(this)[0].id];
@@ -83,6 +76,15 @@ $(".colors div").click(function(e) {
 	value = colors[$(this)[0].id];
 });
 
+var prevButton;
+$(".specialTools>div").click(function(e) {
+	if(prevButton != null) {
+		prevButton.removeClass("selected");
+	}
+	$(this).addClass("selected");
+	prevButton = $(this);
+});
+
 $("#subtools div").click(function(e) {
 	var temp = $(this)[0].className;
 	var tools = ["brush", "stamp", "eraser", "text"];
@@ -94,7 +96,6 @@ $("#subtools div").click(function(e) {
 		case "brush":
 			break;
 		case "stamp":
-			//stamp.src = stamps[$(this)[0].id];
 			stamp.src = $(this).children()[0].src;
 			degrees = 0;
 			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
@@ -373,7 +374,27 @@ $("#saveBtn a").click(function(e) {
 
 });
 
+/* Set selected image as current BG */
 $(".bg").click(function(e) {
+	bgImage.src = $(this).children()[0].src;
+	bgImage.onload = function() {
+		bgObj["srcWidth"] = bgImage.width;
+		bgObj["srcHeight"] = bgImage.width * aspectRatio;
+		bgObj["srcX"] = 0;
+		bgObj["srcY"] = (bgImage.height - bgObj["srcHeight"])/2;
+		if(bgObj["srcHeight"] > bgImage.height) {
+			bgObj["srcWidth"] = bgImage.height/aspectRatio;
+			bgObj["srcHeight"] = bgImage.height;
+			bgObj["srcX"] = (bgImage.width - bgObj["srcWidth"])/2;
+			bgObj["srcY"] = 0;
+		}
+	}
+    $("#mainCanvas").css("background-image", "url(" + bgImage.src + ")");
+	bgIsColor = false;
+});
+
+/* Save and Display BG color */
+$("#fillBG").click(function(e) {
     $("#mainCanvas").css("background-image", "");
 	$("#mainCanvas").css("background-color", value);
 	bgColor = value;
@@ -401,7 +422,7 @@ function handleFiles(e) {
 			bgObj["srcX"] = (bgImage.width - bgObj["srcWidth"])/2;
 			bgObj["srcY"] = 0;
 		}
-		redraw();
+		//redraw();
 	}
 }
 
@@ -411,8 +432,6 @@ function saveImage() {
 	var saveContext = saveCanvas.getContext("2d");
 	saveCanvas.width = width;
 	saveCanvas.height = height;
-	console.log(width + ", " + height);
-	console.log($("#mainCanvas").width() + ", " + $("#mainCanvas").height());
 
 	saveContext.fillStyle = bgColor;
 	saveContext.fillRect(0,0,saveCanvas.width, saveCanvas.height);
