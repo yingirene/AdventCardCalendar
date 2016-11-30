@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
         $("#openSign .countdownDisp").prepend(daysLeft);
     }
     if(today == xmasDay) {
-        window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending me a card?");
+        window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending out a card?");
         $("#misc").show();
     }
     if(typeof(Storage) !== "undefined") {
