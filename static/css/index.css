@@ -64,7 +64,7 @@ a {
 }
 
 .container.expand {
-	margin-left: 0px !important;
+	margin-left: 20px !important;
 }
 
 #subBtn.expand {
@@ -97,10 +97,11 @@ a {
 	max-width: 60vw;
 	height: auto;
 	max-height: 70vh;
-	overflow: hidden;
+	overflow: scroll;
 	color: white;
-	background-color: rgba(254,95,85,1);
-	padding: 5vh 10vw;
+	border: 1px dashed white;
+	background-color: #F74C4C;
+	padding: 4.5vw 9vw;
 	border-radius: 20px;
 	margin: 0 auto;
 	transition: 0.5s ease-in-out;
@@ -125,7 +126,7 @@ a {
 }
 
 .countdownDisp {
-	font-size: 3.5vw;
+	font-size: 4.5vw;
 	text-align: center;
 }
 
@@ -140,7 +141,7 @@ a {
 	display: inline-block;
 	min-height: 8vw;
 	min-width: 8vw;
-	border: 1px solid black;
+	border: 1px solid #9B2626;
 	border-radius: 3px;
 }
 
@@ -181,7 +182,7 @@ a {
 }
 
 #center.expand {
-	margin-left: 0px !important;
+	margin-left: 20px !important;
 }
 
 #tools {
@@ -189,23 +190,59 @@ a {
 	background-color: rgba(240,182,127,0.5);
 	pointer-events: all;
 	text-align: center;
+	padding-top: 5px;
 }
 
 #tools >div>div {
-	background-color: pink;
-	border: 1px solid black;
+	border: 1px dashed rgba(0,0,0,0.5);
 }
 
 #mainTools div {
+	background-color: rgba(254,95,85,1);
 	display: inline-block;
+	padding: 5px;
+	border-radius: 10px;
+	color: white;
+}
+
+#mainTools div:hover {
+	border: 1px dashed rgba(240,182,127,1);
+	cursor: pointer !important;
+}
+
+#mainTools a {
+	padding: 5px;
+	color: white;
 }
 
 #misc {
-	height: 100px;
-	background-color: rgba(238,245,219,0.5);
+	display: none;
+	height: auto;
+	background-color: rgba(238,245,219,0);
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	text-align: center;
+	pointer-events: all;
+}
+
+#misc div{
+	background-color: rgba(240,182,127,1);
+	display: inline-block;
+	font-size: 20px;
+	padding: 10px;
+	margin: 10px;
+	border: 2px solid rgba(238,245,219,1);
+	border-radius: 10px;
+	background: linear-gradient(rgba(250,115,105,1), rgba(240,182,127,1), rgba(250,115,105,1));
+}
+
+#misc a {
+	color: white;
+}
+
+#misc a:hover{
+	font-weight: bolder;
 }
 
 #subtools {
@@ -240,6 +277,7 @@ a {
 #subtools h1 {
 	margin: 5px 0px 0px 5px;
 	text-align: left !important;
+	font-size: 28px;
 }
 
 #subtools .stamp {
@@ -305,6 +343,16 @@ a {
 	text-align-last: center;
 }
 
+.specialTools div:hover:not(.text):not(#inputText) {
+	cursor: pointer !important;
+	background-color: rgba(240,182,127,0.5) !important;
+}
+
+.specialTools a:hover {
+	cursor: pointer !important;
+	background-color: rgba(240,182,127,0.5) !important;
+}
+
 .specialTools .selected {
 	background-color: rgba(240,182,127,0.5) !important;
 }
@@ -360,7 +408,12 @@ a {
 	max-height: 57px;
 	overflow: hidden;
 	margin: 5px;
-	border: 1px solid black;
+	border: 1px solid rgba(0,0,0,0.5) !important;
+}
+
+.colors div:hover {
+	border: 1px solid white !important;
+	cursor: pointer !important;
 }
 
 .hidden {

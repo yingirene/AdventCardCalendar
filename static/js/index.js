@@ -114,14 +114,17 @@ $(".specialTools>div").click(function(e) {
 	}
 
 	if($(this).parent()[0].id != "editTools") {
+		var currButton = $(this);
+		if($(this)[0].id == "inputText") {
+			return;
+		}
 		if(prevButton != null) {
-			if(prevButton[0].id == "customText") {
+			if(prevButton[0].id == "customText" && prevButton != currButton) {
 				$(".text").hide();
 			    $("#inputText").hide();
 			}
 			prevButton.removeClass("selected");
 		}
-		var currButton = $(this);
 		if(!(currButton.hasClass("selected"))) {
 			currButton.addClass("selected");
 			prevButton = currButton;

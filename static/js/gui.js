@@ -7,7 +7,7 @@ window.addEventListener("load", function() {
     xmasDay.setMonth(11);
     xmasDay.setDate(25);
     var daysLeft = Math.round(new Date(xmasDay.getTime() - today.getTime())/(1000*60*60*24));
-    if(today.getMonth == 11) {
+    if(today.getMonth != 11) {
         $("#closedSign").show();
         $("#openSign").hide();
         $("#closedSign .countdownDisp").prepend(daysLeft);
@@ -15,6 +15,10 @@ window.addEventListener("load", function() {
         $("#closedSign").hide();
         $("#openSign").show();
         $("#openSign .countdownDisp").prepend(daysLeft);
+    }
+    if(today == xmasDay) {
+        window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending me a card?");
+        $("#misc").show();
     }
 }, false);
 
@@ -41,7 +45,7 @@ $("#subBtn").click(function(e) {
 
 $("#calendar li").click(function(e) {
     if(!($(this).hasClass("opened"))) {
-        if(today.getDate() != $(this).text()) {
+        if(today.getDate() >= parseInt($(this).text())) {
             $(this).addClass("opened");
             var dayList = document.getElementsByClassName($(this).text());
             for(var i = 0; i < dayList.length; i++) {
