@@ -11,8 +11,14 @@ var colors = {
 	"cyan" : "rgba(0,255,255,1)"
 };
 
-var pipe_popcorn = {
-
+var pipes = {
+	"popcorn" : [
+		"images/pipes/popcorn_1.png",
+		"images/pipes/popcorn_2.png",
+		"images/pipes/popcorn_3.png",
+		"images/pipes/popcorn_4.png",
+		"images/pipes/popcorn_5.png"
+	]
 };
 
 var aspectRatio = 2/3; //yRatio/xRatio
@@ -32,6 +38,7 @@ var value = colors["red"];
 var brushSize = 5;
 var text = "";
 var textStyle = "fill";
+var pipeFrames = [];
 
 var drawReverse = false;
 
@@ -93,22 +100,25 @@ $("#customText").click(function(e) {
 	prevButton = $(this);
 });
 
+var tools = ["brush", "stamp", "eraser", "text", "pipe"];
+var editableTools = ["stamp", "text", "pipe"];
+
+/* Handle Main Tool Selection */
+
 $(".specialTools>div").click(function(e) {
 	var temp = $(this)[0].className;
 	temp = temp.split(" ");
-	var tools = ["brush", "stamp", "eraser", "text"];
 	if(tools.indexOf(temp[0]) >= 0) {
 		type = temp[0];
 		resetTools();
 	}
 
-	if(prevButton[0].id == "customText") {
-		$(".text").hide();
-	    $("#inputText").hide();
-	}
-
 	if($(this).parent()[0].id != "editTools") {
 		if(prevButton != null) {
+			if(prevButton[0].id == "customText") {
+				$(".text").hide();
+			    $("#inputText").hide();
+			}
 			prevButton.removeClass("selected");
 		}
 		var currButton = $(this);
@@ -138,7 +148,7 @@ $(".specialTools>div").click(function(e) {
 			}
 			break;
 		case "rotate":
-			if(type == "stamp" || type == "text") {
+			if(editableTools.indexOf(type) >= 0) {
 				if($(this)[0].id == "right") {
 					degrees+=5;
 				} else {
@@ -152,10 +162,11 @@ $(".specialTools>div").click(function(e) {
 	}
 });
 
+/* Handle Secondary Tool Selection */
+
 $(".otherTools>div").click(function(e) {
 	var temp = $(this)[0].className;
 	temp = temp.split(" ");
-	var tools = ["brush", "stamp", "eraser", "text"];
 	if(tools.indexOf(temp[0]) >= 0) {
 		type = temp[0];
 		resetTools();
@@ -165,10 +176,17 @@ $(".otherTools>div").click(function(e) {
 			stamp.src = $(this).children()[0].src;
 			$("mainCanvas").css({"cursor": "url(" + stamp.src + "), auto"});
 			break;
+		case "pipe":
+			pipeFrames = pipes[$(this)[0].id].slice();
+			break;
 		case "frame":
 			break;
 	}
 });
+
+function getFrame() {
+	return Math.floor(Math.random() * pipeFrames.length);
+}
 
 /* Simple Drawing Mechanic */
 var clickHist = [];
@@ -181,6 +199,7 @@ var clickBrushSize = new Array();
 var clickStamp = new Array();
 var clickText = new Array();
 var clickReverse = new Array();
+var clickPipe = new Array();
 var paint;
 
 function addClick(x,y,dragging) {
@@ -202,11 +221,15 @@ function redraw() {
 	context.lineCap = "round";
 
 	for(var i = 0; i < clickX.length; i++) {
+		if(clickType[i] == "eraser") {
+			context.globalCompositeOperation = "destination-out";
+		} else {
+			context.globalCompositeOperation = "source-over";
+		}
 		context.strokeStyle = clickColor[i];
 		context.lineWidth = clickBrushSize[i];
-		if(clickType[i] == "stamp") {
+		if(clickType[i] == "stamp" || clickType[i] == "pipe") {
 			context.save();
-			context.globalCompositeOperation = "source-over";
 			var currStamp = new Image();
 			currStamp.src = clickStamp[i][0];
 			var scaledWidth = currStamp.width*stampScale*clickBrushSize[i];
@@ -247,20 +270,8 @@ function redraw() {
 					context.strokeText(clickText[i][0], 0, 0);
 				}
 			}
-			/*
-			if(clickText[i][1] == "fill") {
-				context.fillText(clickText[i][0], 0, 0);
-			} else {
-				context.lineWidth = 1;
-				context.strokeText(clickText[i][0], 0, 0);
-			}*/
 			context.restore();
 		} else {
-			if(clickType[i] == "eraser") {
-				context.globalCompositeOperation = "destination-out";
-			} else {
-				context.globalCompositeOperation = "source-over";
-			}
 			context.beginPath();
 			if(clickDrag[i] && i) {
 				context.moveTo(clickX[i-1], clickY[i-1]);
@@ -344,7 +355,7 @@ $(window).keyup(function(e) {
 $("#mainCanvas").mousedown(function(e) {
 	if(!isDrag) {
 		paint = true;
-		if(type != "stamp") {
+		if(type != "stamp" && type != "pipe") {
 			var mouseX = e.pageX - $(this).offset().left;
 			var mouseY = e.pageY - $(this).offset().top;
 			addClick(mouseX, mouseY);
@@ -354,7 +365,7 @@ $("#mainCanvas").mousedown(function(e) {
 });
 
 $("#mainCanvas").mousemove(function(e) {
-	if(paint && type != "stamp") {
+	if(paint && type != "stamp" && type != "pipe") {
 		var mouseX = e.pageX - $(this).offset().left;
 		var mouseY = e.pageY - $(this).offset().top;
 		addClick(mouseX, mouseY, true);
@@ -364,7 +375,10 @@ $("#mainCanvas").mousemove(function(e) {
 
 $("#mainCanvas").mouseup(function(e) {
 	if(paint) {
-		if(type == "stamp") {
+		if(type == "pipe") {
+			stamp.src = pipeFrames[getFrame()];
+		}
+		if(type == "stamp" || type == "pipe") {
 			var mouseX = e.pageX - $(this).offset().left;
 			var mouseY = e.pageY - $(this).offset().top;
 			addClick(mouseX, mouseY);

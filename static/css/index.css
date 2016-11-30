@@ -51,7 +51,7 @@ a {
 	top: 0;
 	height: 100%;
 	width: 20px;
-	margin-left: 200px;
+	margin-left: 180px;
 	pointer-events: all;
 	transition: 0.5s ease-in-out;
 	font-size: 20px;
@@ -213,7 +213,7 @@ a {
 	float: left;
 	height: 100%;
 	left: 0;
-	width: 190px;
+	width: 170px;
 	background-color: rgba(199,239,207,1);
 	transition: 0.5s ease-in-out;
 	border-radius: 0px 20px 20px 0px;
@@ -246,8 +246,25 @@ a {
 	display: inline-block;
 	border: 5px solid rgba(238,245,219,1);
 	border-radius: 5px;
-	max-width: 57px;
-	max-height: 57px;
+	min-width: 62px;
+	min-height: 62px;
+	max-width: 62px;
+	max-height: 62px;
+	padding: 0;
+	overflow: hidden;
+	margin: 5px;
+	background-color: rgba(238,245,219,1);
+}
+
+#subtools .pipe {
+	display: inline-block;
+	border: 5px solid rgba(238,245,219,1);
+	border-radius: 5px;
+	min-width: 62px;
+	min-height: 62px;
+	max-width: 62px;
+	max-height: 62px;
+	padding: 0;
 	overflow: hidden;
 	margin: 5px;
 	background-color: rgba(238,245,219,1);
@@ -258,10 +275,17 @@ a {
 	max-height: 100%;
 }
 
+#subtools .pipe img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
 #subtools .bg {
 	display: inline-block;
 	border: 5px solid rgba(238,245,219,1);
 	border-radius: 5px;
+	min-width: 62px;
+	min-height: 62px;
 	max-width: 62px;
 	max-height: 62px;
 	overflow: hidden;
@@ -310,6 +334,10 @@ a {
 	margin-bottom: 5px;
 }
 
+.otherTools {
+	text-align: left !important;
+}
+
 .otherTools>div {
 	visibility: hidden;
 	padding: 5px;
@@ -336,7 +364,7 @@ a {
 }
 
 .hidden {
-	left: -200px !important;
+	left: -180px !important;
 	/*width: 0 !important;*/
 }
 

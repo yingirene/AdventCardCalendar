@@ -7,7 +7,7 @@ window.addEventListener("load", function() {
     xmasDay.setMonth(11);
     xmasDay.setDate(25);
     var daysLeft = Math.round(new Date(xmasDay.getTime() - today.getTime())/(1000*60*60*24));
-    if(today.getMonth != 11) {
+    if(today.getMonth == 11) {
         $("#closedSign").show();
         $("#openSign").hide();
         $("#closedSign .countdownDisp").prepend(daysLeft);
