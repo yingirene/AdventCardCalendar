@@ -96,12 +96,12 @@ a {
 	min-width: 50vw;
 	max-width: 60vw;
 	height: auto;
-	max-height: 70vh;
+	max-height: 60vh;
 	overflow: scroll;
 	color: white;
-	border: 1px dashed white;
+	border: 5px dashed white;
 	background-color: #F74C4C;
-	padding: 4.5vw 9vw;
+	padding: 4.5vw 6vw;
 	border-radius: 20px;
 	margin: 0 auto;
 	transition: 0.5s ease-in-out;
@@ -132,15 +132,17 @@ a {
 
 #calendar ul {
 	text-align: justify;
-	text-align-last: justify;
+	text-align-last: center;
 	margin-top: 2vh;
 }
 
 #calendar li {
 	position: relative;
 	display: inline-block;
-	min-height: 8vw;
-	min-width: 8vw;
+	min-height: 11vh;
+	min-width: 11vh;
+	max-height: 11vh;
+	max-width: 11vh;
 	border: 1px solid #9B2626;
 	border-radius: 3px;
 }
@@ -158,9 +160,9 @@ a {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	font-size: 3vw;
-	line-height: 2.5vw;
-	padding: 0.5vw;
+	font-size: 3.5vh;
+	line-height: 2.5vh;
+	padding: 0.9vh;
 }
 
 #mainGui {

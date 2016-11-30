@@ -20,6 +20,22 @@ window.addEventListener("load", function() {
         window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending me a card?");
         $("#misc").show();
     }
+    if(typeof(Storage) !== "undefined") {
+        if(localStorage.opened) {
+            var openedBoxes = "";
+            openedBoxes = localStorage.opened;
+            openedBoxes = openedBoxes.split(",");
+            for(day in openedBoxes) {
+                document.getElementById(openedBoxes[day]).className += " opened";
+                var dayList = document.getElementsByClassName(openedBoxes[day]);
+                for(var i = 0; i < dayList.length; i++) {
+                    dayList[i].className += " revert";
+                }
+            }
+        }
+    } else {
+        console.log("Sorry! No web storage support...");
+    }
 }, false);
 
 $("#calBtn").click(function(e) {
@@ -47,6 +63,16 @@ $("#calendar li").click(function(e) {
     if(!($(this).hasClass("opened"))) {
         if(today.getDate() >= parseInt($(this).text())) {
             $(this).addClass("opened");
+            var openedBoxes = $(this).text();
+            if(typeof(Storage) !== "undefined") {
+                if(localStorage.opened) {
+                    openedBoxes = localStorage.opened;
+                    openedBoxes += "," + $(this).text();
+                }
+                localStorage.opened = openedBoxes;
+            } else {
+                console.log("Sorry! No web storage support...");
+            }
             var dayList = document.getElementsByClassName($(this).text());
             for(var i = 0; i < dayList.length; i++) {
                 dayList[i].className += " revert";
