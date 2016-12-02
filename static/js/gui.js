@@ -7,7 +7,7 @@ window.addEventListener("load", function() {
     xmasDay.setMonth(11);
     xmasDay.setDate(25);
     var daysLeft = Math.round(new Date(xmasDay.getTime() - today.getTime())/(1000*60*60*24));
-    if(today.getMonth != 11) {
+    if(today.getMonth() != 11) {
         $("#closedSign").show();
         $("#openSign").hide();
         $("#closedSign .countdownDisp").prepend(daysLeft);
@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
         $("#openSign .countdownDisp").prepend(daysLeft);
     }
     if(today == xmasDay) {
-        window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending out a card?");
+        window.alert("Merry Christmas!!!\nI know you've loved this advent calendar, so how about sending me a card?");
         $("#misc").show();
     }
     if(typeof(Storage) !== "undefined") {
@@ -73,12 +73,19 @@ $("#calendar li").click(function(e) {
             } else {
                 console.log("Sorry! No web storage support...");
             }
+            $("#giftDiv").html("");
             var dayList = document.getElementsByClassName($(this).text());
             for(var i = 0; i < dayList.length; i++) {
                 dayList[i].className += " revert";
+                $("#giftDiv").append("<div>" + dayList[i].innerHTML + "</div>");
             }
+            $("#giftDisp").show();
         }
     }
+});
+
+$("#giftDisp").click(function(e) {
+    $("#giftDisp").hide();
 });
 
 $("#stampBtn").click(function(e) {

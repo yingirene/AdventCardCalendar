@@ -8,6 +8,11 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</head>
 	<body>
+		<div id="giftDisp">
+				<div><h1 class="outlineText">Today's Gift:<h1></div>
+				<div id="giftDiv"></div>
+				<p>Check them out in Stamps and Backgrounds!<br>Click anywhere in the box to close.</p>
+		</div>
 		<div class="container">
 			<div id="canvas"><canvas id="mainCanvas"></canvas></div>
 		</div>
@@ -73,66 +78,66 @@
 						<div class="otherTools hidden" id="stampDiv">
 							<h1>Stamps</h1>
 							<div class="stamp 1"><img src="images/stamps/animal_cat.png"/></div>
-							<div class="stamp 2"><img src="images/stamps/animal_dog.png"/></div>
-							<div class="stamp 3"><img src="images/stamps/bauble_blue.png"/></div>
-							<div class="stamp 4"><img src="images/stamps/bauble_green.png"/></div>
-							<div class="stamp 5"><img src="images/stamps/bauble_magenta.png"/></div>
-							<div class="stamp 6"><img src="images/stamps/bauble_red_festive.png"/></div>
-							<div class="stamp 7"><img src="images/stamps/bauble_red_plain.png"/></div>
-							<div class="stamp 8"><img src="images/stamps/bell_mistletoe_small.png"/></div>
-							<div class="stamp 9"><img src="images/stamps/cookie_gingerbread.png"/></div>
-							<div class="stamp 10"><img src="images/stamps/cookie_single.png"/></div>
-							<div class="stamp 11"><img src="images/stamps/cookie_stack.png"/></div>
-							<div class="pipe 12"><img src="images/pipes/popcorn_1.png"/></div>
-							<div class="stamp 13"><img src="images/stamps/santa_cute.png"/></div>
-							<div class="stamp 14"><img src="images/stamps/santa_hayy.png"/></div>
-							<div class="stamp 15"><img src="images/stamps/snowflake_outline.png"/></div>
-							<div class="stamp 16"><img src="images/stamps/santa_shh.png"/></div>
-							<div class="stamp 17"><img src="images/stamps/santa_sneaky.png"/></div>
-							<div class="stamp 18"><img src="images/stamps/scroll_green.png"/></div>
-							<div class="stamp 19"><img src="images/stamps/scroll_horiz_gold.png"/></div>
-							<div class="stamp 21"><img src="images/stamps/scroll_horiz_old.png"/></div>
-							<div class="stamp 22"><img src="images/stamps/scroll_horiz_white.png"/></div>
-							<div class="stamp 23"><img src="images/stamps/scroll_ribbon.png"/></div>
-							<div class="stamp 24"><img src="images/stamps/snowflake_dark.png"/></div>
-							<div class="stamp 25"><img src="images/stamps/snowflake_patch.png"/></div>
-							<div class="stamp 1"><img src="images/stamps/snowflake_pointy.png"/></div>
-							<div class="stamp 2"><img src="images/stamps/snowflake_white.png"/></div>
-							<div class="stamp 3"><img src="images/stamps/sparkle_filled.png"/></div>
-							<div class="stamp 4"><img src="images/stamps/sparkle_patch.png"/></div>
-							<div class="stamp 5"><img src="images/stamps/sparkle_stroke.png"/></div>
-							<div class="stamp 6"><img src="images/stamps/tree_pointy.png"/></div>
-							<div class="stamp 7"><img src="images/stamps/tree_round.png"/></div>
-							<div class="stamp 8"><img src="images/stamps/wreath_lights.png"/></div>
-							<div class="stamp 9"><img src="images/stamps/wreath_nature.png"/></div>
-							<div class="stamp 10"><img src="images/stamps/corner_top_fancy.png"/></div>
-							<div class="stamp 11"><img src="images/stamps/frame_bottom_gifts_mix.png"/></div>
-							<div class="stamp 12"><img src="images/stamps/frame_corner_ribbon.png"/></div>
+							<div class="stamp 1"><img src="images/stamps/animal_dog.png"/></div>
+							<div class="stamp 1"><img src="images/stamps/bauble_blue.png"/></div>
+							<div class="stamp 2"><img src="images/stamps/bauble_green.png"/></div>
+							<div class="stamp 2"><img src="images/stamps/bauble_magenta.png"/></div>
+							<div class="stamp 2"><img src="images/stamps/bauble_red_festive.png"/></div>
+							<div class="stamp 3"><img src="images/stamps/bauble_red_plain.png"/></div>
+							<div class="stamp 3"><img src="images/stamps/bell_mistletoe_small.png"/></div>
+							<div class="stamp 3"><img src="images/stamps/cookie_gingerbread.png"/></div>
+							<div class="stamp 4"><img src="images/stamps/cookie_single.png"/></div>
+							<div class="stamp 4"><img src="images/stamps/cookie_stack.png"/></div>
+							<div class="pipe 4"><img src="images/pipes/popcorn_1.png"/></div>
+							<div class="stamp 5"><img src="images/stamps/santa_cute.png"/></div>
+							<div class="stamp 5"><img src="images/stamps/santa_hayy.png"/></div>
+							<div class="stamp 5"><img src="images/stamps/snowflake_outline.png"/></div>
+							<div class="stamp 6"><img src="images/stamps/santa_shh.png"/></div>
+							<div class="stamp 6"><img src="images/stamps/santa_sneaky.png"/></div>
+							<div class="stamp 6"><img src="images/stamps/scroll_green.png"/></div>
+							<div class="stamp 7"><img src="images/stamps/scroll_horiz_gold.png"/></div>
+							<div class="stamp 7"><img src="images/stamps/scroll_horiz_old.png"/></div>
+							<div class="stamp 7"><img src="images/stamps/scroll_horiz_white.png"/></div>
+							<div class="stamp 8"><img src="images/stamps/scroll_ribbon.png"/></div>
+							<div class="stamp 8"><img src="images/stamps/snowflake_dark.png"/></div>
+							<div class="stamp 8"><img src="images/stamps/snowflake_patch.png"/></div>
+							<div class="stamp 9"><img src="images/stamps/snowflake_pointy.png"/></div>
+							<div class="stamp 9"><img src="images/stamps/snowflake_white.png"/></div>
+							<div class="stamp 9"><img src="images/stamps/sparkle_filled.png"/></div>
+							<div class="stamp 10"><img src="images/stamps/sparkle_patch.png"/></div>
+							<div class="stamp 10"><img src="images/stamps/sparkle_stroke.png"/></div>
+							<div class="stamp 10"><img src="images/stamps/tree_pointy.png"/></div>
+							<div class="stamp 11"><img src="images/stamps/tree_round.png"/></div>
+							<div class="stamp 11"><img src="images/stamps/wreath_lights.png"/></div>
+							<div class="stamp 11"><img src="images/stamps/wreath_nature.png"/></div>
+							<div class="stamp 12"><img src="images/stamps/corner_top_fancy.png"/></div>
+							<div class="stamp 12"><img src="images/stamps/frame_bottom_gifts_mix.png"/></div>
+							<div class="stamp 13"><img src="images/stamps/frame_corner_ribbon.png"/></div>
 							<div class="stamp 13"><img src="images/stamps/frame_lights.png"/></div>
 							<div class="stamp 14"><img src="images/stamps/frame_mix.png"/></div>
-							<div class="stamp 15"><img src="images/stamps/frame_ribbon.png"/></div>
-							<div class="stamp 16"><img src="images/stamps/frame_sash.png"/></div>
-							<div class="stamp 17"><img src="images/stamps/frame_script.png"/></div>
-							<div class="stamp 18"><img src="images/stamps/frame_sides_snowflake.png"/></div>
-							<div class="stamp 19"><img src="images/stamps/frame_top_ribbon.png"/></div>
-							<div class="stamp 20"><img src="images/stamps/frame_wreath.png"/></div>
-							<div class="stamp 21"><img src="images/stamps/gift_mix.png"/></div>
-							<div class="stamp 22"><img src="images/stamps/gift.png"/></div>
-							<div class="stamp 23"><img src="images/stamps/hat_reindeer.png"/></div>
-							<div class="stamp 24"><img src="images/stamps/hat_santa_round.png"/></div>
-							<div class="stamp 25"><img src="images/stamps/mistletoe_bush.png"/></div>
-							<div class="stamp 1"><img src="images/stamps/mistletoe_round.png"/></div>
-							<div class="stamp 2"><img src="images/stamps/mistletoe_tie.png"/></div>
-							<div class="stamp 3"><img src="images/stamps/pointsettia.png"/></div>
-							<div class="stamp 4"><img src="images/stamps/reindeer_cartoon.png"/></div>
-							<div class="stamp 5"><img src="images/stamps/reindeer_cute.png"/></div>
-							<div class="stamp 4"><img src="images/stamps/reindeer_real.png"/></div>
-							<div class="stamp 6"><img src="images/stamps/reindeer_weird.png"/></div>
-							<div class="stamp 7"><img src="images/stamps/ribbon_bell.png"/></div>
-							<div class="stamp 8"><img src="images/stamps/ribbon_bells.png"/></div>
-							<div class="stamp 9"><img src="images/stamps/ribbon_big.png"/></div>
-							<div class="stamp 10"><img src="images/stamps/ribbon_gift.png"/></div>
-							<div class="stamp 11"><img src="images/stamps/ribbon_mix.png"/></div>
+							<div class="stamp 14"><img src="images/stamps/frame_ribbon.png"/></div>
+							<div class="stamp 15"><img src="images/stamps/frame_sash.png"/></div>
+							<div class="stamp 15"><img src="images/stamps/frame_script.png"/></div>
+							<div class="stamp 16"><img src="images/stamps/frame_sides_snowflake.png"/></div>
+							<div class="stamp 16"><img src="images/stamps/frame_top_ribbon.png"/></div>
+							<div class="stamp 17"><img src="images/stamps/frame_wreath.png"/></div>
+							<div class="stamp 17"><img src="images/stamps/gift_mix.png"/></div>
+							<div class="stamp 18"><img src="images/stamps/gift.png"/></div>
+							<div class="stamp 18"><img src="images/stamps/hat_reindeer.png"/></div>
+							<div class="stamp 19"><img src="images/stamps/hat_santa_round.png"/></div>
+							<div class="stamp 19"><img src="images/stamps/mistletoe_bush.png"/></div>
+							<div class="stamp 20"><img src="images/stamps/mistletoe_round.png"/></div>
+							<div class="stamp 20"><img src="images/stamps/mistletoe_tie.png"/></div>
+							<div class="stamp 21"><img src="images/stamps/pointsettia.png"/></div>
+							<div class="stamp 21"><img src="images/stamps/reindeer_cartoon.png"/></div>
+							<div class="stamp 22"><img src="images/stamps/reindeer_cute.png"/></div>
+							<div class="stamp 22"><img src="images/stamps/reindeer_real.png"/></div>
+							<div class="stamp 23"><img src="images/stamps/reindeer_weird.png"/></div>
+							<div class="stamp 23"><img src="images/stamps/ribbon_bell.png"/></div>
+							<div class="stamp 24"><img src="images/stamps/ribbon_bells.png"/></div>
+							<div class="stamp 24"><img src="images/stamps/ribbon_big.png"/></div>
+							<div class="stamp 25"><img src="images/stamps/ribbon_gift.png"/></div>
+							<div class="stamp 25"><img src="images/stamps/ribbon_mix.png"/></div>
 
 						</div><div class="otherTools hidden" id="bgDiv">
 							<h1>Backgrounds</h1>
@@ -174,7 +179,7 @@
 						</div>
 					</div>
 					<div id="misc">
-						<div><a href="mailto:?Subject=Christmas%20Card" target="_top">Mail Your Card!</a></div>
+						<div><a href="mailto:iying@ucsd.edu?Subject=Christmas%20Card" target="_top">Mail Your Card!</a></div>
 					</div>
 				</div>
 			</div>

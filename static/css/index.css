@@ -11,6 +11,10 @@ element {
 	padding: 0;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 html, body {
 	color: black;
 	background-color: rgba(254,95,85,1);
@@ -85,6 +89,58 @@ a {
 	background-size: cover;
 	background-position: center center;
 	cursor: default;
+}
+
+#giftDisp {
+	display: none;
+	position: absolute;
+	z-index: 2000;
+	top: 32vh;
+	left: 0;
+	right: 0;
+	min-width: 50vw;
+	max-width: 60vw;
+	height: auto;
+	max-height: 40vh;
+	overflow: scroll;
+	color: white;
+	border: 5px dashed white;
+	background-color: rgba(214,209,177,1);
+	padding: 2.5vw 3vw;
+	border-radius: 20px;
+	margin: 0 auto;
+	transition: 0.5s ease-in-out;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	text-align: center;
+}
+
+#giftDisp .show {
+	display: block !important;
+}
+
+#giftDisp div>div {
+	display: inline-block;
+	border: 5px solid white;
+	border-radius: 5px;
+	min-width: 62px;
+	min-height: 62px;
+	max-width: 62px;
+	max-height: 62px;
+	padding: 0;
+	overflow: hidden;
+	margin: 5px;
+	background-color: rgba(214,209,177,1));
+	background: repeating-linear-gradient(
+		-45deg,
+		rgba(214,209,177,1),
+		rgba(214,209,177,1) 10px,
+		white 10px,
+		white 20px
+	);
+}
+
+#giftDisp img {
+	max-height: 62px;
 }
 
 #calendar {
@@ -282,21 +338,7 @@ a {
 	font-size: 28px;
 }
 
-#subtools .stamp {
-	display: inline-block;
-	border: 5px solid rgba(238,245,219,1);
-	border-radius: 5px;
-	min-width: 62px;
-	min-height: 62px;
-	max-width: 62px;
-	max-height: 62px;
-	padding: 0;
-	overflow: hidden;
-	margin: 5px;
-	background-color: rgba(238,245,219,1);
-}
-
-#subtools .pipe {
+#subtools .stamp, .pipe {
 	display: inline-block;
 	border: 5px solid rgba(238,245,219,1);
 	border-radius: 5px;
